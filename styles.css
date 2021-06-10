@@ -1,0 +1,36 @@
+body {
+  display: flex;
+}
+
+.left-side,
+.right-side {
+  background-color: blue;
+  display: flex;
+}
+
+.game-board {
+  background-color: green;
+}
+
+.middle {
+  background-color: pink;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-board tbody {
+  background-color: white;
+}
+
+.game-board td {
+  background-color: red;
+}
+
+/* asides not showing up because nothing in them right now. */
+aside .right {
+
+}
+
+aside .left {
+
+}
