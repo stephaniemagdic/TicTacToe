@@ -1,21 +1,26 @@
 body {
   display: flex;
+  justify-content: center;
 }
 
 .left-side,
 .right-side {
   background-color: blue;
   display: flex;
-}
-
-.game-board {
-  background-color: green;
+  flex: 1;
+  height: 100vh;
 }
 
 .middle {
   background-color: pink;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  flex: 2;
+  height: 100vh;
+}
+.game-board {
+  background-color: green;
 }
 
 .game-board tbody {
@@ -26,7 +31,7 @@ body {
   background-color: red;
 }
 
-/* asides not showing up because nothing in them right now. */
+
 aside .right {
 
 }
