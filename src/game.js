@@ -24,6 +24,24 @@ class Game {
     this.players[currentTurnIndexPosition].takenPositions.push(position);
   }
 
+
+  reset() {
+    for (var i = 0; i < this.players.length; i ++) {
+      this.players[i].takenPositions = [];
+    }
+    this.totalTurnsTaken = 0;
+    //could add extra logic... if you are the winner, you start. ie update currentTurnIndexPosition
+    //with winner.
+  }
+
+  checkOutcome() {
+    //Goal://seperate if Statement: logic to check for win every time.
+    //if win return win.
+
+    //Goal://if totalTurnsTaken + 1 === 9 , then run this code which is check for draw
+    //if draw return draw.
+  }
+
   updateTurn() {
     if (this.currentTurnIndexPosition === 0) {
       this.currentTurn === 1;
@@ -34,13 +52,6 @@ class Game {
     this.totalTurnsTaken += 1;
   }
 
-  reset() {
-    for (var i = 0; i < this.players.length; i ++) {
-      this.players[i].takenPositions = [];
-    }
-    this.totalTurnsTaken = 0;
-    //could add extra logic... if you are the winner, you start. ie update currentTurnIndexPosition
-    //with winner.
-  }
+  //make sure you call checkOutcome before updateTurn.
 
 }
