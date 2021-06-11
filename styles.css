@@ -1,3 +1,7 @@
+.hidden {
+  display: none;
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -19,6 +23,7 @@ body {
   flex: 2;
   height: 100vh;
 }
+
 .game-board {
   background-color: green;
 }
@@ -31,11 +36,8 @@ body {
   background-color: red;
 }
 
-
-aside .right {
-
-}
-
-aside .left {
-
-}
+/* 
+aside section {
+  display: flex;
+  text-align: center;
+} */
