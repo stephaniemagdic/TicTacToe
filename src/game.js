@@ -1,7 +1,7 @@
 class Game {
   constructor() {
     this.currentPlayers = [];
-    this.currentTurn;
+    this.currentTurnPlayerIndex: 0;
     this.totalTurnsTaken = 0;
   }
 
@@ -16,12 +16,16 @@ class Game {
 		var player2 = new Player(2, "heart", 0);
     this.addPlayer(player1);
     this.addPlayer(player2);
-    this.currentTurn = player1;
+    this.currentTurn = 0;
     //add to method or Main.js?
       //if (localStorage), call retrieveWins on currentPlayers array.
   }
 
   addPlayerPosition(position){
-    this.currentTurn.takenPositions.push(position);
+    this.currentPlayers[currentTurnPlayerIndex].takenPositions.push(position);
+  }
+
+  updateTurn() {
+
   }
 }
