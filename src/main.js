@@ -56,19 +56,9 @@ function createHTML() {
 function updatePageText() {
   rightAsideText.innerHTML = `${currentGame.players[0].wins} wins`;
   leftAsideText.innerHTML = `${currentGame.players[1].wins} wins`;
-
-  var img;
-  var alt;
-
   if (currentGame.players[currentTurnIndexPosition].token === "star") {
-    img = ;
-    alt = ;
+    h1.innerText= `It's ⭐'s' turn`;
   } else if (currentGame.players[currentTurnIndexPosition].token === "heart") {
-    img = ;
-    alt = ;
+    h1.innerText = `It's ❤️'s turn`
   }
-
-  h1.innerHTML = `It's <img url=${img} alt=${alt}>'s turn`;
-
-
 }
