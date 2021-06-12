@@ -65,13 +65,31 @@ function createHTML() {
 }
 
 function updatePageText() {
+  //can I have a parameter come in udefined or does it NEED the param... because on page reload there won't be one.
+  //can I just give an argument when I call UpdatePageText on page load?!
+  // if(!outcome)
+
   leftAsideText.innerHTML = `${currentGame.players[0].wins} wins`;
   rightAsideText.innerHTML = `${currentGame.players[1].wins} wins`;
-  if (currentGame.players[currentGame.currentTurnIndexPosition].token === "star") {
+
+    if (currentGame.players[currentGame.currentTurnIndexPosition].token === "star") {
     h1.innerText= `It's ⭐'s turn`;
   } else if (currentGame.players[currentGame.currentTurnIndexPosition].token === "heart") {
     h1.innerText = `It's ❤️'s turn`
   }
+
+//// Think through scenarios, because at first it will display this text but then it changes to reflect above after timeout.
+
+// else if (outcome === true)  {
+//   // h1.innerText = token won!
+//   // setTimeout(function() {currentGame.reset()}, 3000) anon function to call currentPage.reset()
+// } else if (outcome === false) {
+//   // do I just put whats above in code block?
+// } else if (outcome === "draw") {
+//   // it's a draw
+//   // setTimeout(function() {currentGame.reset()}, 3000) anonymous function to call currentPage.reset()
+// }
+
 }
 
 function takeTurn(e) {
@@ -83,19 +101,37 @@ function takeTurn(e) {
   currentGame.players[currentGame.currentTurnIndexPosition].takenPositions.push(e.target.id);
   console.log(currentGame.players[currentGame.currentTurnIndexPosition].takenPositions)
 
-  currentGame.checkOutcome();
+  var outcome = currentGame.checkOutcome();
+
+  pause(outcome);
+  //are these three in the right order.
+  currentGame.updateTurn();
   updatePageText();
-
-
-//Iterate through/filter DOM elements using for loops
-//loop through array and populate the tictac toe board with tokens!
-//loop through player 1's array and append if at each matching TD
-  //grab each TD and append child.
-//loop through player 2's array and append at each matching TD
   createHTML();
 
-  //update the page Last.
-  //first add to array.
+}
+
+function pause() {
+  if (outcome === true)  {
+    if (currentGame.players[currentGame.currentTurnIndexPosition].token === "star") {
+      h1.innerText= `⭐  won!`;
+    } else if (currentGame.players[currentGame.currentTurnIndexPosition].token === "heart") {
+      h1.innerText = `❤️ won!`
+    };
+
+    setTimeout (function() {
+      currentGame.reset()
+    }, 3000);
+
+  } else if (outcome === false) {
+    return;
+
+  } else if (outcome === "draw") {
+    h1.innerText = `It's a draw!`
+    setTimeout (function() {
+      currentGame.reset()
+    }, 3000);
+  }
 }
 
 function addTokens() {
@@ -106,6 +142,6 @@ function addTokens() {
       boardSpots[i].innerText = `⭐`;
     } else if (currentGame.players[1].takenPositions.includes(boardSpots[i].id)) {
       boardSpots[i].innerText = `❤️`;
-    } 
+    }
   }
 }
