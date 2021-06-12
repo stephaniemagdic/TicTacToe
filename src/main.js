@@ -10,6 +10,11 @@ var currentGame;
 
 //---------------------EVENT LISTENERS---------------------------------------//
 window.addEventListener("load", createBoard);
+gameBoardSection.addEventListener("click", function(e) {
+  if (e.target.classList.contains("open-position") && !e.target.innerText) {
+      takeTurn(e);
+  }
+});
 
 //---------------------FUNCTIONS---------------------------------------------//
 function createBoard() {
@@ -17,9 +22,6 @@ function createBoard() {
   currentGame.setUp();
   createHTML();
   updatePageText();
-  //update players wins if on load there were wins in storage.
-  //do this here or in setUp method?
-  //do I need to update page again?
 }
 
 
@@ -62,11 +64,25 @@ function createHTML() {
 }
 
 function updatePageText() {
-  rightAsideText.innerHTML = `${currentGame.players[0].wins} wins`;
-  leftAsideText.innerHTML = `${currentGame.players[1].wins} wins`;
+  leftAsideText.innerHTML = `${currentGame.players[0].wins} wins`;
+  rightAsideText.innerHTML = `${currentGame.players[1].wins} wins`;
   if (currentGame.players[currentGame.currentTurnIndexPosition].token === "star") {
     h1.innerText= `It's ⭐'s turn`;
   } else if (currentGame.players[currentGame.currentTurnIndexPosition].token === "heart") {
     h1.innerText = `It's ❤️'s turn`
   }
+}
+
+function takeTurn(e) {
+  //update the page Last.
+  //first add to array.
+  console.log(e);
+  console.log(event.target.innerHTML);
+  console.log(e.target.id);
+  //find the id of target clicked on.
+    currentGame.players[currentGame.currentTurnIndexPosition].takenPositions.push(e.target.id);
+  console.log(currentGame.players[currentGame.currentTurnIndexPosition].takenPositions)
+
+
+
 }

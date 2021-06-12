@@ -25,10 +25,7 @@ class Game {
         this.players[i].retrieveWinsFromStorage();
       }
     }
-
-
     //should I update totalTurns here to 0 as well?
-      //if (localStorage), call retrieveWins on currentPlayers array---add to this method or Main.js?
   }
 
   addPlayerPosition(position){
