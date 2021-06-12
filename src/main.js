@@ -61,6 +61,7 @@ function createHTML() {
 
   leftAsideToken.innerText = `⭐`;
   rightAsideToken.innerText = `❤️`;
+  addTokens();
 }
 
 function updatePageText() {
@@ -74,15 +75,37 @@ function updatePageText() {
 }
 
 function takeTurn(e) {
-  //update the page Last.
-  //first add to array.
+
   console.log(e);
   console.log(event.target.innerHTML);
   console.log(e.target.id);
-  //find the id of target clicked on.
-    currentGame.players[currentGame.currentTurnIndexPosition].takenPositions.push(e.target.id);
+
+  currentGame.players[currentGame.currentTurnIndexPosition].takenPositions.push(e.target.id);
   console.log(currentGame.players[currentGame.currentTurnIndexPosition].takenPositions)
 
+  currentGame.checkOutcome();
+  updatePageText();
 
 
+//Iterate through/filter DOM elements using for loops
+//loop through array and populate the tictac toe board with tokens!
+//loop through player 1's array and append if at each matching TD
+  //grab each TD and append child.
+//loop through player 2's array and append at each matching TD
+  createHTML();
+
+  //update the page Last.
+  //first add to array.
+}
+
+function addTokens() {
+  var boardSpots = document.querySelectorAll('td');
+  for (var i = 0; i < boardSpots.length; i ++) {
+    // console.log(boardSpots[i].id);
+    if (currentGame.players[0].takenPositions.includes(boardSpots[i].id)) {
+      boardSpots[i].innerText = `⭐`;
+    } else if (currentGame.players[1].takenPositions.includes(boardSpots[i].id)) {
+      boardSpots[i].innerText = `❤️`;
+    } 
+  }
 }
