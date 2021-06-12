@@ -17,11 +17,12 @@ class Game {
     this.addPlayer(player1);
     this.addPlayer(player2);
     this.currentTurnIndexPosition = 0;
+    //should I update totalTurns here to 0 as well?
       //if (localStorage), call retrieveWins on currentPlayers array---add to this method or Main.js?
   }
 
   addPlayerPosition(position){
-    this.players[currentTurnIndexPosition].takenPositions.push(position);
+    this.players[this.currentTurnIndexPosition].takenPositions.push(position);
   }
 
   reset() {
@@ -37,9 +38,9 @@ class Game {
   findMatch (currentWinList) {
   var match = false;
   var count = 0;
-  var playersPositions = this.players[currentTurnIndexPosition].takenPositions;
+  var playersPositions = this.players[this.currentTurnIndexPosition].takenPositions;
   for (var i = 0; i < playersPositions.length; i ++) {
-    for (var j = 0; j < array.length; j ++) {
+    for (var j = 0; j < currentWinList.length; j ++) {
       if (`${playersPositions[i]}` === `${currentWinList[j]}`) {
         count += 1;
       }
@@ -53,17 +54,21 @@ class Game {
 
 
   checkOutcome() {
-      if (this.players[this.currentTurnIndexPosition].takenPositions < 5) {
+      if (this.totalTurnsTaken < 5) {
         return false;
       }
-      if (this.players[this.currentTurnIndexPosition].takenPositions > 5) {
+      if (this.totalTurnsTaken > 5) {
+        console.log("I am here");
         for (var possibleWin in winningBoardSets) {
           var isMatch = this.findMatch(winningBoardSets[possibleWin]);
           if(isMatch) {
-            return true
+            console.log("I am here at isMatch")
+            this.players[this.currentTurnIndexPosition].wins += 1;
+            return true;
           } else if (isMatch && this.totalTurnsTaken + 1 === 9) {
             return "draw";
           } else if (!isMatch) {
+            console.log("I am here at not a match")
             return false;
           }
         }
@@ -71,12 +76,9 @@ class Game {
   }
 
   updateTurn() {
-    console.log("I am here")
     if (this.currentTurnIndexPosition === 0) {
-      console.log("I am here at index pos of 0")
       this.currentTurnIndexPosition = 1;
     } else if (this.currentTurnIndexPosition === 1) {
-      (console.log("I am here at index of 1"))
       this.currentTurnIndexPosition = 0;
     }
     this.totalTurnsTaken += 1;
