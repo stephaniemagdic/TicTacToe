@@ -19,17 +19,10 @@ function createBoard() {
   updatePageText();
   //update players wins if on load there were wins in storage.
   //do this here or in setUp method?
-  if (localStorage.length) {
-    retrieveWins();
-  }
+  //do I need to update page again?
 }
 
-//check that this works.
-function retrieveWins() {
-  for (var i = 0; i < currentGame.players.length; i++) {
-    currentGame.players[i].retrieveWinsFromStorage();
-  }
-}
+
 
 function createHTML() {
   gameBoardSection.innerHTML = "";

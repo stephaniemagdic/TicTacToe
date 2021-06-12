@@ -17,6 +17,16 @@ class Game {
     this.addPlayer(player1);
     this.addPlayer(player2);
     this.currentTurnIndexPosition = 0;
+
+    //check that this works.
+    if (localStorage.length) {
+      //local storage holds wins in it's id, 1 or 2.
+      for (var i = 0; i < this.players.length; i++){
+        this.players[i].retrieveWinsFromStorage();
+      }
+    }
+
+
     //should I update totalTurns here to 0 as well?
       //if (localStorage), call retrieveWins on currentPlayers array---add to this method or Main.js?
   }
@@ -64,6 +74,8 @@ class Game {
         var isMatch = this.findMatch(winningBoardSets[possibleWin]);
         if(isMatch) {
             this.players[this.currentTurnIndexPosition].wins += 1;
+            //check that this works.
+            this.players[this.currentTurnIndexPosition].saveWinsToStorage();
             return true;
         }
       }
