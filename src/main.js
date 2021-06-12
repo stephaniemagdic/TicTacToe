@@ -17,6 +17,18 @@ function createBoard() {
   currentGame.setUp();
   createHTML();
   updatePageText();
+  //update players wins if on load there were wins in storage.
+  //do this here or in setUp method?
+  if (localStorage.length) {
+    retrieveWins();
+  }
+}
+
+//check that this works.
+function retrieveWins() {
+  for (var i = 0; i < currentGame.players.length; i++) {
+    currentGame.players[i].retrieveWinsFromStorage();
+  }
 }
 
 function createHTML() {
