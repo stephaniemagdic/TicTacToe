@@ -25,18 +25,27 @@ body {
 }
 
 .game-board {
+  display: flex;
+  flex-direction: column;
   background-color: green;
+  flex: 5;
+
 }
 
-.game-board tbody {
+.table {
+  flex: 1;
   background-color: white;
+  height: 100%;
+  width: 100%
 }
 
 .game-board td {
   background-color: red;
 }
 
-/* 
+
+
+/*
 aside section {
   display: flex;
   text-align: center;
