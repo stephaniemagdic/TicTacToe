@@ -54,19 +54,23 @@ class Game {
 
 
   checkOutcome() {
-      if (players[currentTurnIndexPosition].takenPositions > 2 && players[currentTurnIndexPosition].takenPositions < 8) {
-        for (var possibleWin in winningBoardSets){
+      if (this.players[this.currentTurnIndexPosition].takenPositions < 5) {
+        return false;
+      }
+      if (this.players[this.currentTurnIndexPosition].takenPositions > 5) {
+        for (var possibleWin in winningBoardSets) {
           var isMatch = this.findMatch(winningBoardSets[possibleWin]);
-          if(!isMatch) {return true};
+          if(isMatch) {
+            return true
+          } else if (isMatch && this.totalTurnsTaken + 1 === 9) {
+            return "draw";
+          } else if (!isMatch) {
+            return false;
+          }
         }
-          return false;
-        } else if (this.totalTurnsTaken + 1 === 9) {
-          return "draw";
-        } else {
-          return false;
-        }
+    }
+}
 
-  }
 
   updateTurn() {
     if (this.currentTurnIndexPosition === 0) {
