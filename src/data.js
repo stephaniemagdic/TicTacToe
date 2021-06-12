@@ -1,4 +1,4 @@
-winningBoardSets = {
+var winningBoardSets = {
   win1: ["TL", "TC", "TR"],
   win2: ["ML", "MC", "MR"],
   win3: ["BL", "BC", "BR"],

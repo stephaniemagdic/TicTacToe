@@ -65,44 +65,21 @@ function createHTML() {
 }
 
 function updatePageText() {
-  //can I have a parameter come in udefined or does it NEED the param... because on page reload there won't be one.
-  //can I just give an argument when I call UpdatePageText on page load?!
-  // if(!outcome)
-
   leftAsideText.innerHTML = `${currentGame.players[0].wins} wins`;
   rightAsideText.innerHTML = `${currentGame.players[1].wins} wins`;
 
-    if (currentGame.players[currentGame.currentTurnIndexPosition].token === "star") {
-    h1.innerText= `It's ⭐'s turn`;
+  if (currentGame.players[currentGame.currentTurnIndexPosition].token === "star") {
+  h1.innerText= `It's ⭐'s turn`;
   } else if (currentGame.players[currentGame.currentTurnIndexPosition].token === "heart") {
     h1.innerText = `It's ❤️'s turn`
   }
 
-//// Think through scenarios, because at first it will display this text but then it changes to reflect above after timeout.
-
-// else if (outcome === true)  {
-//   // h1.innerText = token won!
-//   // setTimeout(function() {currentGame.reset()}, 3000) anon function to call currentPage.reset()
-// } else if (outcome === false) {
-//   // do I just put whats above in code block?
-// } else if (outcome === "draw") {
-//   // it's a draw
-//   // setTimeout(function() {currentGame.reset()}, 3000) anonymous function to call currentPage.reset()
-// }
-
 }
 
+
 function takeTurn(e) {
-
-  console.log(e);
-  console.log(event.target.innerHTML);
-  console.log(e.target.id);
-
   currentGame.players[currentGame.currentTurnIndexPosition].takenPositions.push(e.target.id);
-  console.log(currentGame.players[currentGame.currentTurnIndexPosition].takenPositions)
-
   var outcome = currentGame.checkOutcome();
-
   pause(outcome);
   //are these three in the right order.
   currentGame.updateTurn();
@@ -111,7 +88,8 @@ function takeTurn(e) {
 
 }
 
-function pause() {
+//disable the click on timeout...
+function pause(outcome) {
   if (outcome === true)  {
     if (currentGame.players[currentGame.currentTurnIndexPosition].token === "star") {
       h1.innerText= `⭐  won!`;

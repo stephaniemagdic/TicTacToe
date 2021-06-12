@@ -1,3 +1,16 @@
+//get rid of me and find why not communicating from data.js
+var winningBoardSets = {
+  win1: ["TL", "TC", "TR"],
+  win2: ["ML", "MC", "MR"],
+  win3: ["BL", "BC", "BR"],
+  win4: ["TL", "ML", "BL"],
+  win5: ["TC", "MC", "BC"],
+  win6: ["TR", "MR", "BR"],
+  win7: ["TL", "MC", "BR"],
+  win8: ["TR", "MC", "BL"]
+}
+/// get rid of above. See note.
+
 class Game {
   constructor() {
     this.players = [];
@@ -62,13 +75,16 @@ class Game {
 
   //break possibly into two functions (one function with helper function)
   checkOutcome() {
-    //if currentplayers positions less than 3 in length
-    if (this.totalTurnsTaken < 5) {
+
+    this.totalTurnsTaken += 1;
+
+    if (this.players[this.currentTurnIndexPosition].takenPositions.length < 3) {
       return false;
     }
-    if (this.totalTurnsTaken > 5) {
-      for (var possibleWin in winningBoardSets) {
-        var isMatch = this.findMatch(winningBoardSets[possibleWin]);
+    if (this.players[this.currentTurnIndexPosition].takenPositions.length > 2) {
+      for (let win in winningBoardSets) {
+        let isMatch;
+        isMatch = this.findMatch(winningBoardSets[win]);
         if(isMatch) {
             this.players[this.currentTurnIndexPosition].wins += 1;
             //check that this works.
@@ -76,7 +92,7 @@ class Game {
             return true;
         }
       }
-    } else if (this.totalTurnsTaken + 1 === 9) {
+    } else if (this.totalTurnsTaken === 9) {
       return "draw";
     }
     return false;
@@ -88,7 +104,7 @@ class Game {
     } else if (this.currentTurnIndexPosition === 1) {
       this.currentTurnIndexPosition = 0;
     }
-    this.totalTurnsTaken += 1;
+    // this.totalTurnsTaken += 1;
   }
 }
 
