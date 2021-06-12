@@ -1,7 +1,7 @@
 class Game {
   constructor() {
     this.players = [];
-    this.currentTurnIndexPosition: 0;
+    this.currentTurnIndexPosition = 0;
     this.totalTurnsTaken = 0;
   }
 
@@ -24,7 +24,6 @@ class Game {
     this.players[currentTurnIndexPosition].takenPositions.push(position);
   }
 
-
   reset() {
     for (var i = 0; i < this.players.length; i ++) {
       this.players[i].takenPositions = [];
@@ -34,23 +33,23 @@ class Game {
     //with winner.
   }
 
-    //should this go somewhere else?
-    findMatch (currentWinList) {
-    var match = false;
-    var count = 0;
-    var playersPositions = thisTurnIndexPosition].takenPositions;
-    for (var i = 0; i < playersPositions.length; i ++) {
-      for (var j = 0; j < array.length; j ++) {
-        if (`${playersPositions[i]}` === `${currentWinList[j]}`) {
-          count += 1;
-        }
-          }
-    }
-      if (count === 3) {
-        match = true;
-        return match;
+  //should this go somewhere else?
+  findMatch (currentWinList) {
+  var match = false;
+  var count = 0;
+  var playersPositions = this.players[currentTurnIndexPosition].takenPositions;
+  for (var i = 0; i < playersPositions.length; i ++) {
+    for (var j = 0; j < array.length; j ++) {
+      if (`${playersPositions[i]}` === `${currentWinList[j]}`) {
+        count += 1;
       }
+        }
+  }
+    if (count === 3) {
+      match = true;
+      return match;
     }
+  }
 
 
   checkOutcome() {
@@ -69,16 +68,17 @@ class Game {
           }
         }
     }
-}
-
+  }
 
   updateTurn() {
+    console.log("I am here")
     if (this.currentTurnIndexPosition === 0) {
-      this.currentTurn === 1;
+      console.log("I am here at index pos of 0")
+      this.currentTurnIndexPosition = 1;
     } else if (this.currentTurnIndexPosition === 1) {
-      this.currentTurn === 0;
+      (console.log("I am here at index of 1"))
+      this.currentTurnIndexPosition = 0;
     }
-
     this.totalTurnsTaken += 1;
   }
 
