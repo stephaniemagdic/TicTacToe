@@ -34,12 +34,38 @@ class Game {
     //with winner.
   }
 
-  checkOutcome() {
-    //Goal://seperate if Statement: logic to check for win every time.
-    //if win return win.
+    //should this go somewhere else?
+    findMatch (currentWinList) {
+    var match = false;
+    var count = 0;
+    var playersPositions = thisTurnIndexPosition].takenPositions;
+    for (var i = 0; i < playersPositions.length; i ++) {
+      for (var j = 0; j < array.length; j ++) {
+        if (`${playersPositions[i]}` === `${currentWinList[j]}`) {
+          count += 1;
+        }
+          }
+    }
+      if (count === 3) {
+        match = true;
+        return match;
+      }
+    }
 
-    //Goal://if totalTurnsTaken + 1 === 9 , then run this code which is check for draw
-    //if draw return draw.
+
+  checkOutcome() {
+      if (players[currentTurnIndexPosition].takenPositions > 2 && players[currentTurnIndexPosition].takenPositions < 8) {
+        for (var possibleWin in winningBoardSets){
+          var isMatch = this.findMatch(winningBoardSets[possibleWin]);
+          if(!isMatch) {return true};
+        }
+          return false;
+        } else if (this.totalTurnsTaken + 1 === 9) {
+          return "draw";
+        } else {
+          return false;
+        }
+
   }
 
   updateTurn() {
