@@ -44,35 +44,43 @@ class Game {
       if (`${playersPositions[i]}` === `${currentWinList[j]}`) {
         count += 1;
       }
-        }
-  }
+    }
+  } console.log("count", count);
+
     if (count === 3) {
+      console.log("match", match)
       match = true;
+      return match;
+    } else {
       return match;
     }
   }
 
 
+  //break possibly into two functions.
   checkOutcome() {
-      if (this.totalTurnsTaken < 5) {
-        return false;
-      }
-      if (this.totalTurnsTaken > 5) {
-        console.log("I am here");
-        for (var possibleWin in winningBoardSets) {
-          var isMatch = this.findMatch(winningBoardSets[possibleWin]);
-          if(isMatch) {
-            console.log("I am here at isMatch")
+    console.log(this.totalTurnsTaken);
+
+    //if currentplayers positions less than 3 in length
+    if (this.totalTurnsTaken < 5) {
+      return false;
+    }
+    if (this.totalTurnsTaken > 5) {
+
+      for (var possibleWin in winningBoardSets) {
+        var isMatch = this.findMatch(winningBoardSets[possibleWin]);
+        if(isMatch) {
             this.players[this.currentTurnIndexPosition].wins += 1;
             return true;
-          } else if (isMatch && this.totalTurnsTaken + 1 === 9) {
-            return "draw";
-          } else if (!isMatch) {
-            console.log("I am here at not a match")
-            return false;
-          }
         }
+      }
+    } else if (this.totalTurnsTaken + 1 === 9) {
+      return "draw";
     }
+    // } else {
+    //   return false;
+    // }
+    return false;
   }
 
   updateTurn() {
@@ -84,6 +92,6 @@ class Game {
     this.totalTurnsTaken += 1;
   }
 
-  //make sure you call checkOutcome before updateTurn.
-
 }
+
+  //make sure you call checkOutcome before updateTurn.
