@@ -30,8 +30,7 @@ class Game {
       this.players[i].takenPositions = [];
     }
     this.totalTurnsTaken = 0;
-    //could add extra logic... if you are the winner, you start. ie update currentTurnIndexPosition
-    //with winner.
+    //could add extra logic... if you are the winner, you start. ie update currentTurnIndexPosition with winner.
   }
 
   //should this go somewhere else?
@@ -45,28 +44,22 @@ class Game {
         count += 1;
       }
     }
-  } console.log("count", count);
-
-    if (count === 3) {
-      console.log("match", match)
-      match = true;
-      return match;
-    } else {
-      return match;
-    }
+  }
+  if (count === 3) {
+    match = true;
+    return match;
+  } else {
+    return match;
+  }
   }
 
-
-  //break possibly into two functions.
+  //break possibly into two functions (one function with helper function)
   checkOutcome() {
-    console.log(this.totalTurnsTaken);
-
     //if currentplayers positions less than 3 in length
     if (this.totalTurnsTaken < 5) {
       return false;
     }
     if (this.totalTurnsTaken > 5) {
-
       for (var possibleWin in winningBoardSets) {
         var isMatch = this.findMatch(winningBoardSets[possibleWin]);
         if(isMatch) {
@@ -77,9 +70,6 @@ class Game {
     } else if (this.totalTurnsTaken + 1 === 9) {
       return "draw";
     }
-    // } else {
-    //   return false;
-    // }
     return false;
   }
 
@@ -91,7 +81,8 @@ class Game {
     }
     this.totalTurnsTaken += 1;
   }
-
 }
 
   //make sure you call checkOutcome before updateTurn.
+
+  //call updateTurn within checkOutcome function?
