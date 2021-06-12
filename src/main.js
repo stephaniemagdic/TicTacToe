@@ -14,7 +14,7 @@ window.addEventListener("load", createBoard);
 //---------------------FUNCTIONS---------------------------------------------//
 function createBoard() {
   currentGame = new Game();
-  currentGame.setUpGame();
+  currentGame.setUp();
   createHTML();
   updatePageText();
 }
@@ -56,9 +56,11 @@ function createHTML() {
 function updatePageText() {
   rightAsideText.innerHTML = `${currentGame.players[0].wins} wins`;
   leftAsideText.innerHTML = `${currentGame.players[1].wins} wins`;
-  if (currentGame.players[currentTurnIndexPosition].token === "star") {
-    h1.innerText= `It's ⭐'s' turn`;
-  } else if (currentGame.players[currentTurnIndexPosition].token === "heart") {
+  console.log(currentGame.players)
+  console.log(currentGame.players[currentGame.currentTurnIndexPosition], "<--should give us an object")
+  if (currentGame.players[currentGame.currentTurnIndexPosition].token === "star") {
+    h1.innerText= `It's ⭐'s turn`;
+  } else if (currentGame.players[currentGame.currentTurnIndexPosition].token === "heart") {
     h1.innerText = `It's ❤️'s turn`
   }
 }
