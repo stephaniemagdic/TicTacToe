@@ -85,17 +85,19 @@ class Game {
       for (let win in winningBoardSets) {
         let isMatch;
         isMatch = this.findMatch(winningBoardSets[win]);
-        if(isMatch) {
+        if (isMatch === false && this.totalTurns < 9) {
             this.players[this.currentTurnIndexPosition].wins += 1;
             //check that this works.
             this.players[this.currentTurnIndexPosition].saveWinsToStorage();
             return true;
+        } else if (this.totalTurnsTaken === 9) {
+          console.log("I am in draw -> totalTurnsTaken", this.totalTurnsTaken);
+          return "draw";
         }
-      }
-    } else if (this.totalTurnsTaken === 9) {
-      return "draw";
-    }
+
     return false;
+      }
+    }
   }
 
   updateTurn() {

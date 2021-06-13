@@ -93,6 +93,7 @@ function takeTurn(e) {
 
 //disable the click on timeout...
 function pause(outcome) {
+  console.log(outcome);
   if (outcome === true)  {
     if (currentGame.players[currentGame.currentTurnIndexPosition].token === "star") {
       h1.innerText= `⭐  won!`;
