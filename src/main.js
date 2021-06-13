@@ -93,6 +93,12 @@ function takeTurn(e) {
   var positionSelected = e.target.id;
   currentGame.players[currentGame.currentTurnIndexPosition].takenPositions.push(positionSelected);
   renderPage();
+
+  //rather than have in checkOutcome Method.
+  // will you have to change !outcome then below?
+  // if (currentGame.players[currentGame.currentTurnIndexPosition].takenPositions.length >= 3) {
+  // var outcome = currentGame.checkOutcome();
+  // }
   var outcome = currentGame.checkOutcome();
   if (!outcome) {
     switchTurns(outcome);
