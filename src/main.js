@@ -3,9 +3,8 @@ var leftAsideText = document.querySelector(".player1-wins");
 var rightAsideText = document.querySelector(".player2-wins");
 var leftAsideToken = document.querySelector(".player-1-token");
 var rightAsideToken = document.querySelector(".player-2-token");
-var h1 = document.querySelector(".turn-tracker-winner-display");
+var trackerDisplay = document.querySelector(".turn-tracker-winner-display");
 var gameBoardSection = document.querySelector(".game-board")
-
 var currentGame;
 
 //---------------------EVENT LISTENERS---------------------------------------//
@@ -20,11 +19,11 @@ gameBoardSection.addEventListener("click", function(e) {
 function createBoard() {
   currentGame = new Game();
   currentGame.setUp();
-  createHTML();
+  renderPage();
   updatePageText();
 }
 
-function createHTML() {
+function renderPage() {
   gameBoardSection.innerHTML = "";
   gameBoardSection.innerHTML += `
   <table class="table">
@@ -62,64 +61,80 @@ function createHTML() {
   addTokens();
 }
 
+//combine updatePageText and displayWinOrDraw using parameters.
+//call this updatePageText(text)
+//can I pass parameter of of what inner HTML I want to show instead...
+//then put update wins in its own function.. the leftAside, right aside lines.
 function updatePageText() {
   var token = currentGame.players[currentGame.currentTurnIndexPosition].token;
   leftAsideText.innerHTML = `${currentGame.players[0].wins} wins`;
   rightAsideText.innerHTML = `${currentGame.players[1].wins} wins`;
   if (token === "star") {
-    h1.innerText= `It's ⭐'s turn`;
+    trackerDisplay.innerText = `It's ⭐'s turn`;
   } else if (token === "heart") {
-    h1.innerText = `It's ❤️'s turn`;
+    trackerDisplay.innerText = `It's ❤️'s turn`;
   }
 }
 
 function displayWinOrDraw(outcome) {
+  var token = currentGame.players[currentGame.currentTurnIndexPosition].token;
   if (outcome === true) {
-    if (currentGame.players[currentGame.currentTurnIndexPosition].token === "star") {
-      h1.innerText= `⭐  won!`;
-    } else if (currentGame.players[currentGame.currentTurnIndexPosition].token === "heart") {
-      h1.innerText = `❤️ won!`
+    if (token === "star") {
+      trackerDisplay.innerText= `⭐  won!`;
+    } else if (token === "heart") {
+      trackerDisplay.innerText = `❤️ won!`
     };
   } else if (outcome === "draw") {
-    h1.innerText = `It's a draw!`
+    trackerDisplay.innerText = `It's a draw!`
   }
 }
 
 function takeTurn(e) {
-  currentGame.players[currentGame.currentTurnIndexPosition].takenPositions.push(e.target.id);
-  createHTML();
+  var positionSelected = e.target.id;
+  currentGame.players[currentGame.currentTurnIndexPosition].takenPositions.push(positionSelected);
+  renderPage();
   var outcome = currentGame.checkOutcome();
   if (!outcome) {
-    switchTurns();
+    switchTurns(outcome);
   } else {
     showResult(outcome);
   }
 }
 
-function switchTurns() {
+function switchTurns(outcome) {
   currentGame.updateTurn();
   updatePageText();
-  createHTML();
+  renderPage();
+  if (outcome) {
+    enableClick();
+  }
 }
 
 function showResult(outcome) {
   if (outcome === "draw") {
+    //updatePageText(text) instead.
     displayWinOrDraw(outcome);
     currentGame.reset();
-    gameBoardSection.style.pointerEvents = "none";
-    setTimeout(updateAfterWinOrDraw, 3000);
+    preventClick();
+    setTimeout(function() {
+      switchTurns(outcome)
+    }, 2000);
+
   } else {
     displayWinOrDraw(outcome);
     currentGame.reset();
-    gameBoardSection.style.pointerEvents = "none";
-    setTimeout(updateAfterWinOrDraw, 3000);
+    preventClick();
+    setTimeout(function() {
+      switchTurns(outcome)
+    }, 2000);
   }
 }
 
-function updateAfterWinOrDraw() {
-  currentGame.updateTurn();
-  updatePageText();
-  createHTML();
+function preventClick() {
+  gameBoardSection.style.pointerEvents = "none";
+}
+
+function enableClick() {
   gameBoardSection.style.pointerEvents = "auto";
 }
 
