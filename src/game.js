@@ -31,9 +31,8 @@ class Game {
     this.addPlayer(player2);
     this.currentTurnIndexPosition = 0;
 
-    //check that this works.
+
     if (localStorage.length) {
-      //local storage holds wins in it's id, 1 or 2.
       for (var i = 0; i < this.players.length; i++){
         this.players[i].retrieveWinsFromStorage();
       }
@@ -62,6 +61,7 @@ class Game {
     for (var j = 0; j < currentWinList.length; j ++) {
       if (`${playersPositions[i]}` === `${currentWinList[j]}`) {
         count += 1;
+        console.log(count);
       }
     }
   }
@@ -75,9 +75,7 @@ class Game {
 
   //break possibly into two functions (one function with helper function)
   checkOutcome() {
-
     this.totalTurnsTaken += 1;
-
     if (this.players[this.currentTurnIndexPosition].takenPositions.length < 3) {
       return false;
     }
@@ -85,12 +83,14 @@ class Game {
       for (let win in winningBoardSets) {
         let isMatch;
         isMatch = this.findMatch(winningBoardSets[win]);
-        if (isMatch === false && this.totalTurns < 9) {
+        if (isMatch === true) {
             this.players[this.currentTurnIndexPosition].wins += 1;
-            //check that this works.
             this.players[this.currentTurnIndexPosition].saveWinsToStorage();
             return true;
-        } else if (this.totalTurnsTaken === 9) {
+        }
+        }
+
+        if (this.totalTurnsTaken === 9) {
           console.log("I am in draw -> totalTurnsTaken", this.totalTurnsTaken);
           return "draw";
         }
@@ -98,7 +98,7 @@ class Game {
     return false;
       }
     }
-  }
+
 
   updateTurn() {
     if (this.currentTurnIndexPosition === 0) {
@@ -106,10 +106,6 @@ class Game {
     } else if (this.currentTurnIndexPosition === 1) {
       this.currentTurnIndexPosition = 0;
     }
-    // this.totalTurnsTaken += 1;
   }
+
 }
-
-  //make sure you call checkOutcome before updateTurn.
-
-  //call updateTurn within checkOutcome function?
