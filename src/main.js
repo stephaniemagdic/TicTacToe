@@ -100,6 +100,7 @@ function pause(outcome) {
       h1.innerText = `❤️ won!`
     };
     currentGame.reset();
+    gameBoardSection.style.pointerEvents = "none";
     setTimeout(updateAfterWin, 3000);
 
   } else if (outcome === false) {
@@ -110,12 +111,11 @@ function pause(outcome) {
   } else if (outcome === "draw") {
     h1.innerText = `It's a draw!`
     currentGame.reset();
-    //disable click******
+    //disable timeout.
+    gameBoardSection.style.pointerEvents = "none";
     setTimeout(updateAfterWin, 3000);
   }
 
-  // updatePageText();
-  // createHTML();
 }
 
 function updateAfterWin() {
@@ -123,6 +123,7 @@ function updateAfterWin() {
   updatePageText();
   createHTML();
   //enable click****
+  gameBoardSection.style.pointerEvents = "auto";
 }
 
 function addTokens() {
