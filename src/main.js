@@ -63,12 +63,25 @@ function createHTML() {
 }
 
 function updatePageText() {
+  var token = currentGame.players[currentGame.currentTurnIndexPosition].token;
   leftAsideText.innerHTML = `${currentGame.players[0].wins} wins`;
   rightAsideText.innerHTML = `${currentGame.players[1].wins} wins`;
-  if (currentGame.players[currentGame.currentTurnIndexPosition].token === "star") {
+  if (token === "star") {
     h1.innerText= `It's ⭐'s turn`;
-  } else if (currentGame.players[currentGame.currentTurnIndexPosition].token === "heart") {
-    h1.innerText = `It's ❤️'s turn`
+  } else if (token === "heart") {
+    h1.innerText = `It's ❤️'s turn`;
+  }
+}
+
+function displayWinOrDraw(outcome) {
+  if (outcome === true) {
+    if (currentGame.players[currentGame.currentTurnIndexPosition].token === "star") {
+      h1.innerText= `⭐  won!`;
+    } else if (currentGame.players[currentGame.currentTurnIndexPosition].token === "heart") {
+      h1.innerText = `❤️ won!`
+    };
+  } else if (outcome === "draw") {
+    h1.innerText = `It's a draw!`
   }
 }
 
@@ -76,35 +89,34 @@ function takeTurn(e) {
   currentGame.players[currentGame.currentTurnIndexPosition].takenPositions.push(e.target.id);
   createHTML();
   var outcome = currentGame.checkOutcome();
-  pause(outcome);
-}
-
-function pause(outcome) {
-  console.log(outcome);
-  if (outcome === true)  {
-    if (currentGame.players[currentGame.currentTurnIndexPosition].token === "star") {
-      h1.innerText= `⭐  won!`;
-    } else if (currentGame.players[currentGame.currentTurnIndexPosition].token === "heart") {
-      h1.innerText = `❤️ won!`
-    };
-    currentGame.reset();
-    gameBoardSection.style.pointerEvents = "none";
-    setTimeout(updateAfterWin, 3000);
-
-  } else if (outcome === false) {
-    currentGame.updateTurn();
-    updatePageText();
-    createHTML();
-
-  } else if (outcome === "draw") {
-    h1.innerText = `It's a draw!`
-    currentGame.reset();
-    gameBoardSection.style.pointerEvents = "none";
-    setTimeout(updateAfterWin, 3000);
+  if (!outcome) {
+    switchTurns();
+  } else {
+    showResult(outcome);
   }
 }
 
-function updateAfterWin() {
+function switchTurns() {
+  currentGame.updateTurn();
+  updatePageText();
+  createHTML();
+}
+
+function showResult(outcome) {
+  if (outcome === "draw") {
+    displayWinOrDraw(outcome);
+    currentGame.reset();
+    gameBoardSection.style.pointerEvents = "none";
+    setTimeout(updateAfterWinOrDraw, 3000);
+  } else {
+    displayWinOrDraw(outcome);
+    currentGame.reset();
+    gameBoardSection.style.pointerEvents = "none";
+    setTimeout(updateAfterWinOrDraw, 3000);
+  }
+}
+
+function updateAfterWinOrDraw() {
   currentGame.updateTurn();
   updatePageText();
   createHTML();

@@ -1,16 +1,3 @@
-//get rid of me and find why not communicating from data.js
-var winningBoardSets = {
-  win1: ["TL", "TC", "TR"],
-  win2: ["ML", "MC", "MR"],
-  win3: ["BL", "BC", "BR"],
-  win4: ["TL", "ML", "BL"],
-  win5: ["TC", "MC", "BC"],
-  win6: ["TR", "MR", "BR"],
-  win7: ["TL", "MC", "BR"],
-  win8: ["TR", "MC", "BL"]
-}
-/// get rid of above. See note.
-
 class Game {
   constructor() {
     this.players = [];
@@ -18,8 +5,6 @@ class Game {
     this.totalTurnsTaken = 0;
   }
 
-  //is this function below necessary? //not for local storage purpose
-  //but for SRP purpose
   addPlayer(player) {
     this.players.push(player);
   }
@@ -30,14 +15,12 @@ class Game {
     this.addPlayer(player1);
     this.addPlayer(player2);
     this.currentTurnIndexPosition = 0;
-
-
     if (localStorage.length) {
       for (var i = 0; i < this.players.length; i++){
         this.players[i].retrieveWinsFromStorage();
       }
     }
-    //should I update totalTurns here to 0 as well?
+
   }
 
   addPlayerPosition(position){
@@ -54,51 +37,53 @@ class Game {
 
   //should this go somewhere else?
   findMatch (currentWinList) {
-  var match = false;
-  var count = 0;
-  var playersPositions = this.players[this.currentTurnIndexPosition].takenPositions;
-  for (var i = 0; i < playersPositions.length; i ++) {
-    for (var j = 0; j < currentWinList.length; j ++) {
-      if (`${playersPositions[i]}` === `${currentWinList[j]}`) {
-        count += 1;
-        console.log(count);
+    var match = false;
+    var count = 0;
+    var playersPositions = this.players[this.currentTurnIndexPosition].takenPositions;
+    for (var i = 0; i < playersPositions.length; i ++) {
+      for (var j = 0; j < currentWinList.length; j ++) {
+        if (`${playersPositions[i]}` === `${currentWinList[j]}`) {
+          count += 1;
+        }
       }
     }
-  }
-  if (count === 3) {
-    match = true;
-    return match;
-  } else {
-    return match;
-  }
+    if (count === 3) {
+      match = true;
+      return match;
+    } else {
+      return match;
+    }
   }
 
-  //break possibly into two functions (one function with helper function)
-  checkOutcome() {
+  addTurn() {
     this.totalTurnsTaken += 1;
-    if (this.players[this.currentTurnIndexPosition].takenPositions.length < 3) {
+  }
+
+  //any simpler way to do this?
+  checkOutcome() {
+    //put this before you check outcome in the DOM
+    this.addTurn();
+    var currentPlayer = this.players[this.currentTurnIndexPosition];
+    //move this to dom function.
+    if (currentPlayer.takenPositions.length < 3) {
       return false;
     }
-    if (this.players[this.currentTurnIndexPosition].takenPositions.length > 2) {
-      for (let win in winningBoardSets) {
-        let isMatch;
+    if (currentPlayer.takenPositions.length > 2) {
+      for (var win in winningBoardSets) {
+        var isMatch;
         isMatch = this.findMatch(winningBoardSets[win]);
-        if (isMatch === true) {
-            this.players[this.currentTurnIndexPosition].wins += 1;
-            this.players[this.currentTurnIndexPosition].saveWinsToStorage();
+        if (isMatch) {
+            currentPlayer.wins += 1;
+            currentPlayer.saveWinsToStorage();
             return true;
         }
-        }
-
+      }
         if (this.totalTurnsTaken === 9) {
-          console.log("I am in draw -> totalTurnsTaken", this.totalTurnsTaken);
           return "draw";
         }
-
     return false;
       }
     }
-
 
   updateTurn() {
     if (this.currentTurnIndexPosition === 0) {
@@ -107,5 +92,4 @@ class Game {
       this.currentTurnIndexPosition = 0;
     }
   }
-
 }
