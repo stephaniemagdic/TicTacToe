@@ -79,12 +79,15 @@ function updatePageText() {
 
 function takeTurn(e) {
   currentGame.players[currentGame.currentTurnIndexPosition].takenPositions.push(e.target.id);
+  createHTML();
   var outcome = currentGame.checkOutcome();
   pause(outcome);
   //are these three in the right order.
-  currentGame.updateTurn();
-  updatePageText();
-  createHTML();
+
+  //are these three ever happening?
+  // currentGame.updateTurn();
+  // updatePageText();
+  // createHTML();
 
 }
 
@@ -96,23 +99,30 @@ function pause(outcome) {
     } else if (currentGame.players[currentGame.currentTurnIndexPosition].token === "heart") {
       h1.innerText = `❤️ won!`
     };
-
-    setTimeout (function() {
-      currentGame.reset()
-    }, 3000);
+    currentGame.reset();
+    setTimeout(updateAfterWin, 3000);
 
   } else if (outcome === false) {
-    return;
+    currentGame.updateTurn();
+    updatePageText();
+    createHTML();
 
   } else if (outcome === "draw") {
     h1.innerText = `It's a draw!`
-    setTimeout (function() {
-      currentGame.reset()
-    }, 3000);
+    currentGame.reset();
+    //disable click******
+    setTimeout(updateAfterWin, 3000);
   }
 
   // updatePageText();
   // createHTML();
+}
+
+function updateAfterWin() {
+  currentGame.updateTurn();
+  updatePageText();
+  createHTML();
+  //enable click****
 }
 
 function addTokens() {
