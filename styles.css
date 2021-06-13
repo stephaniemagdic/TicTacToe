@@ -5,6 +5,7 @@
 body {
   display: flex;
   justify-content: center;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .left,
@@ -16,13 +17,13 @@ body {
   flex-direction: column;
   flex: 1;
   height: 100vh;
+  background-image: linear-gradient(yellow, red);
 }
 
 .player1-wins,
 .player2-wins {
   text-align: center;
 }
-
 
 .player-1-token,
 .player-2-token {
@@ -49,9 +50,7 @@ h1 {
 .game-board {
   display: flex;
   flex-direction: column;
-  /* background-color: green; */
   flex: 5;
-
 }
 
 .table {
@@ -59,22 +58,18 @@ h1 {
   background-color: white;
   height: 100%;
   width: 100%;
+  padding: 20px;
 }
-
-
 
 .game-board tr {
   height: 50px;
-
 }
 
 .game-board td {
-  /* border: 3px solid black; */
   width: 50px;
   height: 50px;
   text-align: center;
   font-size: 40px;
-
 }
 
 .corner-left-style {
@@ -112,14 +107,3 @@ h1 {
 .corner-bottom-right-style {
   border-left: 2px solid black;
 }
-
-
-
-
-
-
-/*
-aside section {
-  display: flex;
-  text-align: center;
-} */
