@@ -99,4 +99,25 @@ class Game {
       this.players[i].saveWinsToStorage();
     }
   }
+
+  subtractWin(player) {
+    if (player === "player1" && this.players[0].wins > 0) {
+      this.players[0].wins -= 1;
+      this.players[0].saveWinsToStorage();
+    } else if (player === "player2" && this.players[1].wins > 0) {
+      this.players[1].wins -= 1;
+      this.players[1].saveWinsToStorage();
+    }
+  }
+
+  addWin(player) {
+    if (player === "player1") {
+      this.players[0].wins += 1;
+      this.players[0].saveWinsToStorage();
+    } else if (player === "player2") {
+      this.players[1].wins += 1;
+      this.players[1].saveWinsToStorage();
+    }
+  }
+
 }

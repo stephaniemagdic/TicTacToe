@@ -108,6 +108,10 @@ h1 {
   border-left: 2px solid black;
 }
 
-button .reset-wins {
+/* button .reset-wins {
   flex: 1;
+} */
+
+.disabled {
+  cursor: not-allowed;
 }
