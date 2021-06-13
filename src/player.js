@@ -5,7 +5,7 @@ class Player {
     this.wins = wins;
     this.takenPositions = [];
   }
-  //still need to put this in a function.
+
   saveWinsToStorage() {
     var playerWins = JSON.stringify(this.wins);
     localStorage.setItem(`${this.id}`, playerWins);
