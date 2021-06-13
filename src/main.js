@@ -110,6 +110,9 @@ function pause(outcome) {
       currentGame.reset()
     }, 3000);
   }
+
+  // updatePageText();
+  // createHTML();
 }
 
 function addTokens() {
