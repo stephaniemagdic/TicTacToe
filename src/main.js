@@ -32,27 +32,27 @@ function createHTML() {
   <table class="table">
     <tbody>
       <tr class="row-one">
-        <td id="TL" class="open-position">
+        <td id="TL" class="open-position corner-left-style">
         </td>
-        <td id="TC" class="open-position">
+        <td id="TC" class="open-position top-style">
         </td>
-        <td id="TR" class="open-position">
+        <td id="TR" class="open-position corner-right-style">
         </td>
       </tr>
       <tr class="row-two">
-        <td id="ML" class="open-position">
+        <td id="ML" class="open-position left-style">
         </td>
-        <td id="MC" class="open-position">
+        <td id="MC" class="open-position middle-style">
         </td>
-        <td id="MR" class="open-position">
+        <td id="MR" class="open-position right-style">
         </td>
       </tr>
       <tr class="row-three">
-        <td id="BL" class="open-position">
+        <td id="BL" class="open-position corner-bottom-left-style">
         </td>
-        <td id="BC" class="open-position">
+        <td id="BC" class="open-position bottom-style">
         </td>
-        <td id="BR" class="open-position">
+        <td id="BR" class="open-position corner-bottom-right-style">
         </td>
       </tr>
     </tbody>

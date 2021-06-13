@@ -7,16 +7,34 @@ body {
   justify-content: center;
 }
 
+.left,
+.right,
 .left-side,
 .right-side {
   background-color: blue;
   display: flex;
+  flex-direction: column;
   flex: 1;
   height: 100vh;
 }
 
+.player1-wins,
+.player2-wins {
+  text-align: center;
+}
+
+
+.player-1-token,
+.player-2-token {
+  font-size: 30px;
+  text-align: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
 .middle {
-  background-color: pink;
+  background-color: white;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,10 +42,14 @@ body {
   height: 100vh;
 }
 
+h1 {
+  text-align: center;
+}
+
 .game-board {
   display: flex;
   flex-direction: column;
-  background-color: green;
+  /* background-color: green; */
   flex: 5;
 
 }
@@ -37,12 +59,62 @@ body {
   background-color: white;
   height: 100%;
   width: 100%;
-  border: 3px solid black;
+}
+
+
+
+.game-board tr {
+  height: 50px;
+
 }
 
 .game-board td {
-  background-color: red;
+  /* border: 3px solid black; */
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 40px;
+
 }
+
+.corner-left-style {
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+.top-style {
+  border-bottom: 2px solid black;
+}
+
+.corner-right-style {
+  border-left: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+.left-style {
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+.middle-style {
+  border-bottom: 2px solid black;
+}
+
+.right-style {
+  border-left: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+.corner-bottom-left-style {
+  border-right: 2px solid black;
+}
+
+.corner-bottom-right-style {
+  border-left: 2px solid black;
+}
+
+
+
 
 
 
