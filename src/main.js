@@ -24,8 +24,6 @@ function createBoard() {
   updatePageText();
 }
 
-
-
 function createHTML() {
   gameBoardSection.innerHTML = "";
   gameBoardSection.innerHTML += `
@@ -67,31 +65,20 @@ function createHTML() {
 function updatePageText() {
   leftAsideText.innerHTML = `${currentGame.players[0].wins} wins`;
   rightAsideText.innerHTML = `${currentGame.players[1].wins} wins`;
-
   if (currentGame.players[currentGame.currentTurnIndexPosition].token === "star") {
-  h1.innerText= `It's ⭐'s turn`;
+    h1.innerText= `It's ⭐'s turn`;
   } else if (currentGame.players[currentGame.currentTurnIndexPosition].token === "heart") {
     h1.innerText = `It's ❤️'s turn`
   }
-
 }
-
 
 function takeTurn(e) {
   currentGame.players[currentGame.currentTurnIndexPosition].takenPositions.push(e.target.id);
   createHTML();
   var outcome = currentGame.checkOutcome();
   pause(outcome);
-  //are these three in the right order.
-
-  //are these three ever happening?
-  // currentGame.updateTurn();
-  // updatePageText();
-  // createHTML();
-
 }
 
-//disable the click on timeout...
 function pause(outcome) {
   console.log(outcome);
   if (outcome === true)  {
@@ -112,25 +99,21 @@ function pause(outcome) {
   } else if (outcome === "draw") {
     h1.innerText = `It's a draw!`
     currentGame.reset();
-    //disable timeout.
     gameBoardSection.style.pointerEvents = "none";
     setTimeout(updateAfterWin, 3000);
   }
-
 }
 
 function updateAfterWin() {
   currentGame.updateTurn();
   updatePageText();
   createHTML();
-  //enable click****
   gameBoardSection.style.pointerEvents = "auto";
 }
 
 function addTokens() {
   var boardSpots = document.querySelectorAll('td');
   for (var i = 0; i < boardSpots.length; i ++) {
-    // console.log(boardSpots[i].id);
     if (currentGame.players[0].takenPositions.includes(boardSpots[i].id)) {
       boardSpots[i].innerText = `⭐`;
     } else if (currentGame.players[1].takenPositions.includes(boardSpots[i].id)) {
