@@ -20,7 +20,6 @@ class Game {
         this.players[i].retrieveWinsFromStorage();
       }
     }
-
   }
 
   addPlayerPosition(position){
@@ -33,6 +32,11 @@ class Game {
     }
     this.totalTurnsTaken = 0;
     //could add extra logic... if you are the winner, you start. ie update currentTurnIndexPosition with winner.
+  }
+  
+//is this method necessary?
+  addTurn() {
+    this.totalTurnsTaken += 1;
   }
 
   //should this go somewhere else?
@@ -53,10 +57,6 @@ class Game {
     } else {
       return match;
     }
-  }
-
-  addTurn() {
-    this.totalTurnsTaken += 1;
   }
 
   //any simpler way to do this?
