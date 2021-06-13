@@ -1,3 +1,16 @@
+//get rid of me and find why not communicating from data.js
+var winningBoardSets = {
+  win1: ["TL", "TC", "TR"],
+  win2: ["ML", "MC", "MR"],
+  win3: ["BL", "BC", "BR"],
+  win4: ["TL", "ML", "BL"],
+  win5: ["TC", "MC", "BC"],
+  win6: ["TR", "MR", "BR"],
+  win7: ["TL", "MC", "BR"],
+  win8: ["TR", "MC", "BL"]
+}
+/// get rid of above. See note.
+
 class Game {
   constructor() {
     this.players = [];
@@ -17,8 +30,14 @@ class Game {
     this.addPlayer(player1);
     this.addPlayer(player2);
     this.currentTurnIndexPosition = 0;
+
+
+    if (localStorage.length) {
+      for (var i = 0; i < this.players.length; i++){
+        this.players[i].retrieveWinsFromStorage();
+      }
+    }
     //should I update totalTurns here to 0 as well?
-      //if (localStorage), call retrieveWins on currentPlayers array---add to this method or Main.js?
   }
 
   addPlayerPosition(position){
@@ -42,6 +61,7 @@ class Game {
     for (var j = 0; j < currentWinList.length; j ++) {
       if (`${playersPositions[i]}` === `${currentWinList[j]}`) {
         count += 1;
+        console.log(count);
       }
     }
   }
@@ -55,23 +75,30 @@ class Game {
 
   //break possibly into two functions (one function with helper function)
   checkOutcome() {
-    //if currentplayers positions less than 3 in length
-    if (this.totalTurnsTaken < 5) {
+    this.totalTurnsTaken += 1;
+    if (this.players[this.currentTurnIndexPosition].takenPositions.length < 3) {
       return false;
     }
-    if (this.totalTurnsTaken > 5) {
-      for (var possibleWin in winningBoardSets) {
-        var isMatch = this.findMatch(winningBoardSets[possibleWin]);
-        if(isMatch) {
+    if (this.players[this.currentTurnIndexPosition].takenPositions.length > 2) {
+      for (let win in winningBoardSets) {
+        let isMatch;
+        isMatch = this.findMatch(winningBoardSets[win]);
+        if (isMatch === true) {
             this.players[this.currentTurnIndexPosition].wins += 1;
+            this.players[this.currentTurnIndexPosition].saveWinsToStorage();
             return true;
         }
-      }
-    } else if (this.totalTurnsTaken + 1 === 9) {
-      return "draw";
-    }
+        }
+
+        if (this.totalTurnsTaken === 9) {
+          console.log("I am in draw -> totalTurnsTaken", this.totalTurnsTaken);
+          return "draw";
+        }
+
     return false;
-  }
+      }
+    }
+
 
   updateTurn() {
     if (this.currentTurnIndexPosition === 0) {
@@ -79,10 +106,6 @@ class Game {
     } else if (this.currentTurnIndexPosition === 1) {
       this.currentTurnIndexPosition = 0;
     }
-    this.totalTurnsTaken += 1;
   }
+
 }
-
-  //make sure you call checkOutcome before updateTurn.
-
-  //call updateTurn within checkOutcome function?
