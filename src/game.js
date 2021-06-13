@@ -33,7 +33,7 @@ class Game {
     this.totalTurnsTaken = 0;
     //could add extra logic... if you are the winner, you start. ie update currentTurnIndexPosition with winner.
   }
-  
+
 //is this method necessary?
   addTurn() {
     this.totalTurnsTaken += 1;
@@ -90,6 +90,13 @@ class Game {
       this.currentTurnIndexPosition = 1;
     } else if (this.currentTurnIndexPosition === 1) {
       this.currentTurnIndexPosition = 0;
+    }
+  }
+
+  resetWins() {
+    for (var i = 0; i < this.players.length; i ++) {
+      this.players[i].wins = 0;
+      this.players[i].saveWinsToStorage();
     }
   }
 }

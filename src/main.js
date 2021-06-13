@@ -4,7 +4,8 @@ var rightAsideText = document.querySelector(".player2-wins");
 var leftAsideToken = document.querySelector(".player-1-token");
 var rightAsideToken = document.querySelector(".player-2-token");
 var trackerDisplay = document.querySelector(".turn-tracker-winner-display");
-var gameBoardSection = document.querySelector(".game-board")
+var gameBoardSection = document.querySelector(".game-board");
+var resetWinsButton = document.querySelector(".reset-wins");
 var currentGame;
 
 //---------------------EVENT LISTENERS---------------------------------------//
@@ -14,6 +15,8 @@ gameBoardSection.addEventListener("click", function(e) {
       takeTurn(e);
   }
 });
+
+resetWinsButton.addEventListener("click", clearWins);
 
 //---------------------FUNCTIONS---------------------------------------------//
 function createBoard() {
@@ -153,4 +156,10 @@ function addTokens() {
       boardSpots[i].innerText = `❤️`;
     }
   }
+}
+
+function clearWins() {
+  currentGame.resetWins();
+  renderPage();
+  updatePageText();
 }

@@ -107,3 +107,7 @@ h1 {
 .corner-bottom-right-style {
   border-left: 2px solid black;
 }
+
+button .reset-wins {
+  flex: 1;
+}
