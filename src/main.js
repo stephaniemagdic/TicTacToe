@@ -14,7 +14,6 @@ var currentGame;
 
 //---------------------EVENT LISTENERS---------------------------------------//
 window.addEventListener("load", createBoard);
-// resetWinsButton.addEventListener("click", clearWins);
 gameBoardSection.addEventListener("click", function(e) {
   if (e.target.classList.contains("open-position") && !e.target.innerText) {
       takeTurn(e);
@@ -182,7 +181,6 @@ function addTokens() {
 }
 
 function updateWins(amt, playerIndex) {
-  console.log(currentGame);
   currentGame.changeWins(amt, playerIndex);
   renderPage();
   updatePageText();
