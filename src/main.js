@@ -134,7 +134,7 @@ function displayWinOrDraw(outcome) {
   if (outcome === true) {
     trackerDisplay.innerText= `${token}  won!`;
   } else if (outcome === "draw") {
-    trackerDisplay.innerText = `It's a draw!`
+    trackerDisplay.innerText = `It's a draw!`;
   }
 }
 

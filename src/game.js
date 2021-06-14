@@ -32,7 +32,6 @@ class Game {
       this.players[i].takenPositions = [];
     }
     this.totalTurnsTaken = 0;
-    //could add extra logic... if you are the winner, you start. ie update currentTurnIndexPosition with winner.
   }
 
 //is this method necessary?
@@ -40,29 +39,28 @@ class Game {
     this.totalTurnsTaken += 1;
   }
 
-  //should this go somewhere else?
-  findMatch (currentWinList) {
-    var match = false;
+  // should this go somewhere else?
+  findMatch(currentWinList) {
     var count = 0;
+    var scenarioMatch = false;
     var playersPositions = this.players[this.currentTurnIndexPosition].takenPositions;
+
     for (var i = 0; i < playersPositions.length; i ++) {
-      for (var j = 0; j < currentWinList.length; j ++) {
-        if (`${playersPositions[i]}` === `${currentWinList[j]}`) {
-          count += 1;
-        }
-      }
+      var position = playersPositions[i];
+      // var match = this.checkMatch(position, currentWinList);
+      var match = currentWinList.includes(position);
+      if (match) {
+            count += 1;
+       }
     }
     if (count === 3) {
-      match = true;
-      return match;
-    } else {
-      return match;
+      scenarioMatch = true;
     }
-  }
+    return scenarioMatch;
+   }
 
-  //any simpler way to do this?
   checkOutcome() {
-    //put this before you check outcome in the DOM
+    //put this before you check outcome in the main.js file. ***
     this.addTurn();
     var currentPlayer = this.players[this.currentTurnIndexPosition];
     //move this to dom function.
@@ -71,8 +69,8 @@ class Game {
     }
     if (currentPlayer.takenPositions.length > 2) {
       for (var win in winningBoardSets) {
-        var isMatch;
-        isMatch = this.findMatch(winningBoardSets[win]);
+        var listToCheck = winningBoardSets[win];
+        var isMatch = this.findMatch(listToCheck);
         if (isMatch) {
             currentPlayer.wins += 1;
             currentPlayer.saveWinsToStorage();
