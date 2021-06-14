@@ -9,9 +9,10 @@ class Game {
     this.players.push(player);
   }
 
-  setUp() {
-    var player1 = new Player(1, "star", 0);
-		var player2 = new Player(2, "heart", 0);
+  setUp(player1Token, player2Token) {
+    this.players = [];
+    var player1 = new Player(1, player1Token, 0);
+    var player2 = new Player(2, player2Token, 0);
     this.addPlayer(player1);
     this.addPlayer(player2);
     this.currentTurnIndexPosition = 0;
