@@ -157,24 +157,13 @@ function switchTurns(outcome) {
   }
 }
 
-//can I condense this??
 function showResult(outcome) {
-  if (outcome === "draw") {
     updatePageText(outcome)
     currentGame.reset();
     preventClick();
     setTimeout(function() {
       switchTurns(outcome)
     }, 2000);
-//note: I changed this to equal win instead of true.
-  } else if (outcome === "win") {
-    updatePageText(outcome)
-    currentGame.reset();
-    preventClick();
-    setTimeout(function() {
-      switchTurns(outcome)
-    }, 2000);
-  }
 }
 
 function preventClick() {
