@@ -4,7 +4,12 @@ var rightAsideText = document.querySelector(".player2-wins");
 var leftAsideToken = document.querySelector(".player-1-token");
 var rightAsideToken = document.querySelector(".player-2-token");
 var trackerDisplay = document.querySelector(".turn-tracker-winner-display");
-var gameBoardSection = document.querySelector(".game-board")
+var gameBoardSection = document.querySelector(".game-board");
+var resetWinsButton = document.querySelector(".reset-wins");
+var subtractPlayer1WinButton = document.querySelector(".subtract-win-player1")
+var subtractPlayer2WinButton = document.querySelector(".subtract-win-player2")
+var addWinPlayer1Button = document.querySelector(".add-win-player1");
+var addWinPlayer2Button = document.querySelector(".add-win-player2");
 var currentGame;
 
 //---------------------EVENT LISTENERS---------------------------------------//
@@ -13,6 +18,26 @@ gameBoardSection.addEventListener("click", function(e) {
   if (e.target.classList.contains("open-position") && !e.target.innerText) {
       takeTurn(e);
   }
+});
+
+subtractPlayer1WinButton.addEventListener("click", function() {
+  updateWins(-1, 0);
+});
+
+subtractPlayer2WinButton.addEventListener("click", function() {
+  updateWins(-1, 1);
+});
+
+addWinPlayer1Button.addEventListener("click", function() {
+  updateWins(1, 0);
+});
+
+addWinPlayer2Button.addEventListener("click", function() {
+  updateWins(1, 1);
+});
+
+resetWinsButton.addEventListener("click", function() {
+  updateWins(0, "both");
 });
 
 //---------------------FUNCTIONS---------------------------------------------//
@@ -153,4 +178,10 @@ function addTokens() {
       boardSpots[i].innerText = `❤️`;
     }
   }
+}
+
+function updateWins(amt, playerIndex) {
+  currentGame.changeWins(amt, playerIndex);
+  renderPage();
+  updatePageText();
 }
