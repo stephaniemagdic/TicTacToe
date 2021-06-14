@@ -14,28 +14,31 @@ var currentGame;
 
 //---------------------EVENT LISTENERS---------------------------------------//
 window.addEventListener("load", createBoard);
+// resetWinsButton.addEventListener("click", clearWins);
 gameBoardSection.addEventListener("click", function(e) {
   if (e.target.classList.contains("open-position") && !e.target.innerText) {
       takeTurn(e);
   }
 });
 
-resetWinsButton.addEventListener("click", clearWins);
-
 subtractPlayer1WinButton.addEventListener("click", function() {
-  subtractWin("player1");
+  updateWins(-1, 0);
 });
 
 subtractPlayer2WinButton.addEventListener("click", function() {
-  subtractWin("player2");
+  updateWins(-1, 1);
 });
 
 addWinPlayer1Button.addEventListener("click", function() {
-  addWin("player1");
+  updateWins(1, 0);
 });
 
 addWinPlayer2Button.addEventListener("click", function() {
-  addWin("player2");
+  updateWins(1, 1);
+});
+
+resetWinsButton.addEventListener("click", function() {
+  updateWins(0, "both");
 });
 
 //---------------------FUNCTIONS---------------------------------------------//
@@ -178,20 +181,9 @@ function addTokens() {
   }
 }
 
-function clearWins() {
-  currentGame.resetWins();
-  renderPage();
-  updatePageText();
-}
-
-function subtractWin(player) {
-  currentGame.subtractWin(player);
-  renderPage();
-  updatePageText();
-}
-
-function addWin(player) {
-  currentGame.addWin(player);
+function updateWins(amt, playerIndex) {
+  console.log(currentGame);
+  currentGame.changeWins(amt, playerIndex);
   renderPage();
   updatePageText();
 }

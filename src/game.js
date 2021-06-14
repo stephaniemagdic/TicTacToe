@@ -93,30 +93,19 @@ class Game {
     }
   }
 
-  resetWins() {
-    for (var i = 0; i < this.players.length; i ++) {
-      this.players[i].wins = 0;
-      this.players[i].saveWinsToStorage();
-    }
-  }
-
-  subtractWin(player) {
-    if (player === "player1" && this.players[0].wins > 0) {
-      this.players[0].wins -= 1;
-      this.players[0].saveWinsToStorage();
-    } else if (player === "player2" && this.players[1].wins > 0) {
-      this.players[1].wins -= 1;
-      this.players[1].saveWinsToStorage();
-    }
-  }
-
-  addWin(player) {
-    if (player === "player1") {
-      this.players[0].wins += 1;
-      this.players[0].saveWinsToStorage();
-    } else if (player === "player2") {
-      this.players[1].wins += 1;
-      this.players[1].saveWinsToStorage();
+  changeWins(amt, playerIndex) {
+    if (playerIndex === 0 || playerIndex === 1) {
+      var playerToUpdate = this.players[playerIndex];
+      if (playerToUpdate.wins > 0 || amt > 0) {
+        playerToUpdate.wins += amt;
+        playerToUpdate.saveWinsToStorage();
+      }
+    } else if (playerIndex === "both") {
+      for (var i = 0; i < this.players.length; i++) {
+        console.log("this.players", this.players[i]);
+        this.players[i].wins = 0;
+        this.players[i].saveWinsToStorage();
+      }
     }
   }
 
