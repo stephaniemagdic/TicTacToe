@@ -10,6 +10,8 @@ var subtractPlayer1WinButton = document.querySelector(".subtract-win-player1")
 var subtractPlayer2WinButton = document.querySelector(".subtract-win-player2")
 var addWinPlayer1Button = document.querySelector(".add-win-player1");
 var addWinPlayer2Button = document.querySelector(".add-win-player2");
+var selectLeftEmoji = document.querySelector("#selectLeft")
+var selectRightEmoji = document.querySelector("#selectRight")
 var currentGame;
 
 //---------------------EVENT LISTENERS---------------------------------------//
@@ -40,15 +42,28 @@ resetWinsButton.addEventListener("click", function() {
   updateWins(0, "both");
 });
 
+selectLeftEmoji.addEventListener("change", function(e) {
+  updatePlayer1(e)}
+);
+
+selectRightEmoji.addEventListener("change", function(e) {
+  updatePlayer2(e)}
+);
+
 //---------------------FUNCTIONS---------------------------------------------//
 function createBoard() {
   currentGame = new Game();
-  currentGame.setUp();
+  var player1 = `🧗`;
+  var player2 = `🤺`;
+  currentGame.setUp(player1, player2);
   renderPage();
   updatePageText();
 }
 
 function renderPage() {
+  var token1 = currentGame.players[0].token;
+  var token2 = currentGame.players[1].token;
+
   gameBoardSection.innerHTML = "";
   gameBoardSection.innerHTML += `
   <table class="table">
@@ -81,10 +96,27 @@ function renderPage() {
   </table>
   `;
 
-  leftAsideToken.innerText = `⭐`;
-  rightAsideToken.innerText = `❤️`;
+  leftAsideToken.innerText = `${token1}`;
+  rightAsideToken.innerText = `${token2}`;
   addTokens();
 }
+
+function updatePlayer1(e) {
+  var emoji = e.target.value;
+  currentGame.players[0].token = emoji;
+  //do I need both functions below?
+  renderPage();
+  updatePageText();
+}
+
+function updatePlayer2(e) {
+  var emoji = e.target.value;
+  currentGame.players[1].token = emoji;
+  //do I need both functions below?
+  renderPage();
+  updatePageText();
+}
+
 
 //combine updatePageText and displayWinOrDraw using parameters.
 //call this updatePageText(text)
@@ -94,21 +126,13 @@ function updatePageText() {
   var token = currentGame.players[currentGame.currentTurnIndexPosition].token;
   leftAsideText.innerHTML = `${currentGame.players[0].wins} wins`;
   rightAsideText.innerHTML = `${currentGame.players[1].wins} wins`;
-  if (token === "star") {
-    trackerDisplay.innerText = `It's ⭐'s turn`;
-  } else if (token === "heart") {
-    trackerDisplay.innerText = `It's ❤️'s turn`;
-  }
+  trackerDisplay.innerText = `It's ${token}'s turn`;
 }
 
 function displayWinOrDraw(outcome) {
   var token = currentGame.players[currentGame.currentTurnIndexPosition].token;
   if (outcome === true) {
-    if (token === "star") {
-      trackerDisplay.innerText= `⭐  won!`;
-    } else if (token === "heart") {
-      trackerDisplay.innerText = `❤️ won!`
-    };
+    trackerDisplay.innerText= `${token}  won!`;
   } else if (outcome === "draw") {
     trackerDisplay.innerText = `It's a draw!`
   }
@@ -170,12 +194,15 @@ function enableClick() {
 }
 
 function addTokens() {
+  var token1 = currentGame.players[0].token;
+  var token2 = currentGame.players[1].token;
+
   var boardSpots = document.querySelectorAll('td');
   for (var i = 0; i < boardSpots.length; i ++) {
     if (currentGame.players[0].takenPositions.includes(boardSpots[i].id)) {
-      boardSpots[i].innerText = `⭐`;
+      boardSpots[i].innerText = `${token1}`;
     } else if (currentGame.players[1].takenPositions.includes(boardSpots[i].id)) {
-      boardSpots[i].innerText = `❤️`;
+      boardSpots[i].innerText = `${token2}`;
     }
   }
 }
