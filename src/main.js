@@ -117,21 +117,13 @@ function updatePlayer2(e) {
   updatePageText();
 }
 
-
-//combine updatePageText and displayWinOrDraw using parameters.
-//call this updatePageText(text)
-//can I pass parameter of of what inner HTML I want to show instead...
-//then put update wins in its own function.. the leftAside, right aside lines.
-function updatePageText() {
+function updatePageText(outcome) {
   var token = currentGame.players[currentGame.currentTurnIndexPosition].token;
   leftAsideText.innerHTML = `${currentGame.players[0].wins} wins`;
   rightAsideText.innerHTML = `${currentGame.players[1].wins} wins`;
-  trackerDisplay.innerText = `It's ${token}'s turn`;
-}
-
-function displayWinOrDraw(outcome) {
-  var token = currentGame.players[currentGame.currentTurnIndexPosition].token;
-  if (outcome === true) {
+  if (!outcome) {
+    trackerDisplay.innerText = `It's ${token}'s turn`;
+  } else if (outcome === true) {
     trackerDisplay.innerText= `${token}  won!`;
   } else if (outcome === "draw") {
     trackerDisplay.innerText = `It's a draw!`;
@@ -140,14 +132,15 @@ function displayWinOrDraw(outcome) {
 
 function takeTurn(e) {
   var positionSelected = e.target.id;
-  currentGame.players[currentGame.currentTurnIndexPosition].takenPositions.push(positionSelected);
+  var currentPlayerPositions = currentGame.players[currentGame.currentTurnIndexPosition].takenPositions;
+  currentPlayerPositions.push(positionSelected);
   renderPage();
 
-  //rather than have in checkOutcome Method.
-  // will you have to change !outcome then below?
-  // if (currentGame.players[currentGame.currentTurnIndexPosition].takenPositions.length >= 3) {
-  // var outcome = currentGame.checkOutcome();
-  // }
+  currentGame.addTurn();
+//   if (currentPlayerPositions.length >= 3) {
+//   var outcome = currentGame.checkOutcome();
+//   showResult(outcome)
+// } else {switchTurns(false);}
   var outcome = currentGame.checkOutcome();
   if (!outcome) {
     switchTurns(outcome);
@@ -167,8 +160,7 @@ function switchTurns(outcome) {
 
 function showResult(outcome) {
   if (outcome === "draw") {
-    //updatePageText(text) instead.
-    displayWinOrDraw(outcome);
+    updatePageText(outcome)
     currentGame.reset();
     preventClick();
     setTimeout(function() {
@@ -176,7 +168,7 @@ function showResult(outcome) {
     }, 2000);
 
   } else {
-    displayWinOrDraw(outcome);
+    updatePageText(outcome)
     currentGame.reset();
     preventClick();
     setTimeout(function() {

@@ -44,10 +44,8 @@ class Game {
     var count = 0;
     var scenarioMatch = false;
     var playersPositions = this.players[this.currentTurnIndexPosition].takenPositions;
-
     for (var i = 0; i < playersPositions.length; i ++) {
       var position = playersPositions[i];
-      // var match = this.checkMatch(position, currentWinList);
       var match = currentWinList.includes(position);
       if (match) {
             count += 1;
@@ -60,13 +58,13 @@ class Game {
    }
 
   checkOutcome() {
-    //put this before you check outcome in the main.js file. ***
-    this.addTurn();
     var currentPlayer = this.players[this.currentTurnIndexPosition];
     //move this to dom function.
+
     if (currentPlayer.takenPositions.length < 3) {
       return false;
     }
+
     if (currentPlayer.takenPositions.length > 2) {
       for (var win in winningBoardSets) {
         var listToCheck = winningBoardSets[win];
