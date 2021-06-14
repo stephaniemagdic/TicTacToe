@@ -34,12 +34,10 @@ class Game {
     this.totalTurnsTaken = 0;
   }
 
-//is this method necessary?
   addTurn() {
     this.totalTurnsTaken += 1;
   }
 
-  // should this go somewhere else?
   findMatch(currentWinList) {
     var count = 0;
     var scenarioMatch = false;
@@ -60,11 +58,9 @@ class Game {
   checkOutcome() {
     var currentPlayer = this.players[this.currentTurnIndexPosition];
     //move this to dom function.
-
     if (currentPlayer.takenPositions.length < 3) {
       return false;
     }
-
     if (currentPlayer.takenPositions.length > 2) {
       for (var win in winningBoardSets) {
         var listToCheck = winningBoardSets[win];
@@ -72,7 +68,9 @@ class Game {
         if (isMatch) {
             currentPlayer.wins += 1;
             currentPlayer.saveWinsToStorage();
-            return true;
+            return "win";
+            //note I changed to string of win instead of true.
+            // return true;
         }
       }
         if (this.totalTurnsTaken === 9) {

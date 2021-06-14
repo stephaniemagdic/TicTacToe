@@ -6,12 +6,12 @@ var rightAsideToken = document.querySelector(".player-2-token");
 var trackerDisplay = document.querySelector(".turn-tracker-winner-display");
 var gameBoardSection = document.querySelector(".game-board");
 var resetWinsButton = document.querySelector(".reset-wins");
-var subtractPlayer1WinButton = document.querySelector(".subtract-win-player1")
-var subtractPlayer2WinButton = document.querySelector(".subtract-win-player2")
-var addWinPlayer1Button = document.querySelector(".add-win-player1");
-var addWinPlayer2Button = document.querySelector(".add-win-player2");
-var selectLeftEmoji = document.querySelector("#selectLeft")
-var selectRightEmoji = document.querySelector("#selectRight")
+var player1WinSubtractButton = document.querySelector(".subtract-win-player1");
+var player2WinSubtractButton = document.querySelector(".subtract-win-player2");
+var player1WinAddButton = document.querySelector(".add-win-player1");
+var player2WinAddButton = document.querySelector(".add-win-player2");
+var leftEmojiSelect = document.querySelector("#selectLeft");
+var rightEmojiSelect = document.querySelector("#selectRight");
 var currentGame;
 
 //---------------------EVENT LISTENERS---------------------------------------//
@@ -22,19 +22,19 @@ gameBoardSection.addEventListener("click", function(e) {
   }
 });
 
-subtractPlayer1WinButton.addEventListener("click", function() {
+player1WinSubtractButton.addEventListener("click", function() {
   updateWins(-1, 0);
 });
 
-subtractPlayer2WinButton.addEventListener("click", function() {
+player2WinSubtractButton.addEventListener("click", function() {
   updateWins(-1, 1);
 });
 
-addWinPlayer1Button.addEventListener("click", function() {
+player1WinAddButton.addEventListener("click", function() {
   updateWins(1, 0);
 });
 
-addWinPlayer2Button.addEventListener("click", function() {
+player2WinAddButton.addEventListener("click", function() {
   updateWins(1, 1);
 });
 
@@ -42,20 +42,20 @@ resetWinsButton.addEventListener("click", function() {
   updateWins(0, "both");
 });
 
-selectLeftEmoji.addEventListener("change", function(e) {
-  updatePlayer1(e)}
-);
+leftEmojiSelect.addEventListener("change", function(e) {
+  updatePlayer1(e);
+});
 
-selectRightEmoji.addEventListener("change", function(e) {
-  updatePlayer2(e)}
-);
+rightEmojiSelect.addEventListener("change", function(e) {
+  updatePlayer2(e);
+});
 
 //---------------------FUNCTIONS---------------------------------------------//
 function createBoard() {
   currentGame = new Game();
-  var player1 = `🧗`;
-  var player2 = `🤺`;
-  currentGame.setUp(player1, player2);
+  var player1DefaultToken = `🧗`;
+  var player2DefaultToken = `🤺`;
+  currentGame.setUp(player1DefaultToken, player2DefaultToken);
   renderPage();
   updatePageText();
 }
@@ -104,7 +104,6 @@ function renderPage() {
 function updatePlayer1(e) {
   var emoji = e.target.value;
   currentGame.players[0].token = emoji;
-  //do I need both functions below?
   renderPage();
   updatePageText();
 }
@@ -112,7 +111,6 @@ function updatePlayer1(e) {
 function updatePlayer2(e) {
   var emoji = e.target.value;
   currentGame.players[1].token = emoji;
-  //do I need both functions below?
   renderPage();
   updatePageText();
 }
@@ -123,7 +121,9 @@ function updatePageText(outcome) {
   rightAsideText.innerHTML = `${currentGame.players[1].wins} wins`;
   if (!outcome) {
     trackerDisplay.innerText = `It's ${token}'s turn`;
-  } else if (outcome === true) {
+    //I think I need true down here...//better way to write this.
+  } else if (outcome === "win") {
+  // } else if (outcome === true) {
     trackerDisplay.innerText= `${token}  won!`;
   } else if (outcome === "draw") {
     trackerDisplay.innerText = `It's a draw!`;
@@ -135,7 +135,6 @@ function takeTurn(e) {
   var currentPlayerPositions = currentGame.players[currentGame.currentTurnIndexPosition].takenPositions;
   currentPlayerPositions.push(positionSelected);
   renderPage();
-
   currentGame.addTurn();
 //   if (currentPlayerPositions.length >= 3) {
 //   var outcome = currentGame.checkOutcome();
@@ -158,6 +157,7 @@ function switchTurns(outcome) {
   }
 }
 
+//can I condense this??
 function showResult(outcome) {
   if (outcome === "draw") {
     updatePageText(outcome)
@@ -166,8 +166,8 @@ function showResult(outcome) {
     setTimeout(function() {
       switchTurns(outcome)
     }, 2000);
-
-  } else {
+//note: I changed this to equal win instead of true.
+  } else if (outcome === "win") {
     updatePageText(outcome)
     currentGame.reset();
     preventClick();
@@ -188,7 +188,6 @@ function enableClick() {
 function addTokens() {
   var token1 = currentGame.players[0].token;
   var token2 = currentGame.players[1].token;
-
   var boardSpots = document.querySelectorAll('td');
   for (var i = 0; i < boardSpots.length; i ++) {
     if (currentGame.players[0].takenPositions.includes(boardSpots[i].id)) {
