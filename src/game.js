@@ -34,20 +34,16 @@ class Game {
     this.totalTurnsTaken = 0;
   }
 
-//is this method necessary?
   addTurn() {
     this.totalTurnsTaken += 1;
   }
 
-  // should this go somewhere else?
   findMatch(currentWinList) {
     var count = 0;
     var scenarioMatch = false;
     var playersPositions = this.players[this.currentTurnIndexPosition].takenPositions;
-
     for (var i = 0; i < playersPositions.length; i ++) {
       var position = playersPositions[i];
-      // var match = this.checkMatch(position, currentWinList);
       var match = currentWinList.includes(position);
       if (match) {
             count += 1;
@@ -60,8 +56,6 @@ class Game {
    }
 
   checkOutcome() {
-    //put this before you check outcome in the main.js file. ***
-    this.addTurn();
     var currentPlayer = this.players[this.currentTurnIndexPosition];
     //move this to dom function.
     if (currentPlayer.takenPositions.length < 3) {
@@ -74,7 +68,7 @@ class Game {
         if (isMatch) {
             currentPlayer.wins += 1;
             currentPlayer.saveWinsToStorage();
-            return true;
+            return "win";
         }
       }
         if (this.totalTurnsTaken === 9) {
@@ -92,16 +86,15 @@ class Game {
     }
   }
 
-  changeWins(amt, playerIndex) {
+  adjustWins(amt, playerIndex) {
     if (playerIndex === 0 || playerIndex === 1) {
-      var playerToUpdate = this.players[playerIndex];
-      if (playerToUpdate.wins > 0 || amt > 0) {
-        playerToUpdate.wins += amt;
-        playerToUpdate.saveWinsToStorage();
+      var player = this.players[playerIndex];
+      if (player.wins > 0 || amt > 0) {
+        player.wins += amt;
+        player.saveWinsToStorage();
       }
     } else if (playerIndex === "both") {
       for (var i = 0; i < this.players.length; i++) {
-        console.log("this.players", this.players[i]);
         this.players[i].wins = 0;
         this.players[i].saveWinsToStorage();
       }
