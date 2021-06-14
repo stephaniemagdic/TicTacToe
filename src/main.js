@@ -121,9 +121,7 @@ function updatePageText(outcome) {
   rightAsideText.innerHTML = `${currentGame.players[1].wins} wins`;
   if (!outcome) {
     trackerDisplay.innerText = `It's ${token}'s turn`;
-    //I think I need true down here...//better way to write this.
   } else if (outcome === "win") {
-  // } else if (outcome === true) {
     trackerDisplay.innerText= `${token}  won!`;
   } else if (outcome === "draw") {
     trackerDisplay.innerText = `It's a draw!`;
@@ -174,6 +172,7 @@ function enableClick() {
   gameBoardSection.style.pointerEvents = "auto";
 }
 
+//can I refactor this?
 function addTokens() {
   var token1 = currentGame.players[0].token;
   var token2 = currentGame.players[1].token;
@@ -188,7 +187,7 @@ function addTokens() {
 }
 
 function updateWins(amt, playerIndex) {
-  currentGame.changeWins(amt, playerIndex);
+  currentGame.adjustWins(amt, playerIndex);
   renderPage();
   updatePageText();
 }

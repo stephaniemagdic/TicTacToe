@@ -69,8 +69,6 @@ class Game {
             currentPlayer.wins += 1;
             currentPlayer.saveWinsToStorage();
             return "win";
-            //note I changed to string of win instead of true.
-            // return true;
         }
       }
         if (this.totalTurnsTaken === 9) {
@@ -88,16 +86,15 @@ class Game {
     }
   }
 
-  changeWins(amt, playerIndex) {
+  adjustWins(amt, playerIndex) {
     if (playerIndex === 0 || playerIndex === 1) {
-      var playerToUpdate = this.players[playerIndex];
-      if (playerToUpdate.wins > 0 || amt > 0) {
-        playerToUpdate.wins += amt;
-        playerToUpdate.saveWinsToStorage();
+      var player = this.players[playerIndex];
+      if (player.wins > 0 || amt > 0) {
+        player.wins += amt;
+        player.saveWinsToStorage();
       }
     } else if (playerIndex === "both") {
       for (var i = 0; i < this.players.length; i++) {
-        console.log("this.players", this.players[i]);
         this.players[i].wins = 0;
         this.players[i].saveWinsToStorage();
       }
