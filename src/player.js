@@ -18,4 +18,17 @@ class Player {
       this.wins = parsedWins;
     }
   }
+
+  adjustWins(amt) {
+    if (this.wins > 0 || amt > 0) {
+      this.wins += amt;
+      this.saveWinsToStorage();
+    }
+  }
+
+  resetWins() {
+    this.wins = 0;
+    this.saveWinsToStorage();
+  }
+
 }
