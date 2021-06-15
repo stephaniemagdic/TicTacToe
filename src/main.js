@@ -18,7 +18,7 @@ var currentGame;
 window.addEventListener("load", createBoard);
 gameBoardSection.addEventListener("click", function(e) {
   if (e.target.classList.contains("open-position") && !e.target.innerText) {
-      takeTurn(e);
+    takeTurn(e);
   }
 });
 
@@ -154,7 +154,7 @@ function takeTurn(e) {
 }
 
 function addWin() {
-  var player = currentGame.players[currentGame.currentPlayersTurnIndex]
+  var player = currentGame.players[currentGame.currentPlayersTurnIndex];
   player.adjustWins(1);
   player.saveWinsToStorage();
 }
@@ -169,7 +169,7 @@ function switchTurns(outcome) {
 }
 
 function showResult(outcome) {
-    updatePageText(outcome)
+    updatePageText(outcome);
     currentGame.reset();
     preventClick();
     setTimeout(function() {
@@ -189,10 +189,10 @@ function addTokens(player1Token, player2Token) {
   var boardPositions = document.querySelectorAll('td');
   for (var i = 0; i < boardPositions.length; i ++) {
     if (currentGame.player1Positions.includes(boardPositions[i].id)) {
-      boardPositions[i].innerHTML = `<p role="img" aria-label="player1-token">${player1Token}</p>`
+      boardPositions[i].innerHTML = `<p role="img" aria-label="player1-token">${player1Token}</p>`;
       // boardPositions[i].innerText = `${player1Token}`;
     } else if (currentGame.player2Positions.includes(boardPositions[i].id)) {
-      boardPositions[i].innerHTML = `<p role="img" aria-label="player2-token">${player2Token}</p>`
+      boardPositions[i].innerHTML = `<p role="img" aria-label="player2-token">${player2Token}</p>`;
       // boardPositions[i].innerText = `${player2Token}`;
     }
   }
@@ -207,7 +207,7 @@ function updateWins(amt, playerIndex) {
 
 function clearWins() {
   for (var i = 0; i < currentGame.players.length; i++) {
-    currentGame.players[i].resetWins()
+    currentGame.players[i].resetWins();
     currentGame.players[i].saveWinsToStorage();
   }
   renderPage();
