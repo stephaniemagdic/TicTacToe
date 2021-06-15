@@ -33,21 +33,21 @@ JavaScript (ECMAScript 2009)
 
 ## Instructions for running and viewing
 
-You can play Tic Tac Toe here. [x](x) 
+You can access the game by `cloning this repo` and opening the `index.html` file in your browser! That is all you need. You also have the option to use the class methods and play in your browser with your fellow coding friends to check my data model (and give me feedback)!
 
 * **Choose a token:**  
   * Use the `drop down` to choose a token from a list of 7 possible player tokens. Depending on if you choose to be player 1 or player 2, you will have different   activity-themed tokens to choose from.
   * If you do not select a token, your will recieve a default player token of the first option in the list.
   * If you choose, you may select a new token in the middle of the game, and your player tokens on the game board will reflect your new token. 
 
-![Select a token gif](https://i.ibb.co/NSqRWLR/recording.gif = 250)
+![Select a token gif](https://i.ibb.co/NSqRWLR/recording.gif)
 
 
 * **Add a win:**  
   * Use the `Add a win buttons` to add a win to the player's total wins. 
   * You might have taken a players turn or your teammate refreshed the page in frustration. No Worries. Use this button to add a win to your score at any time.
 
-![Add a win gif](https://i.ibb.co/6ZNgXS4/add-a-win.gif = 250)
+![Add a win gif](https://i.ibb.co/6ZNgXS4/add-a-win.gif)
 
 * **Subtract a win:** 
   * Use the `Subtract a win buttons` to subtract a win from the player's total wins.
@@ -59,8 +59,6 @@ You can play Tic Tac Toe here. [x](x)
   * Use the `Reset Wins button` to reset both players wins and start fresh.
   * You might find yourself coming back to the game on your next roadtrip to find that the data from the previous session's games are stored. Simply use the reset wins button to clear all wins rather than finagling with the add and subtract win buttons. 
 
-Put GIFFY here.
-
 * **Place a token:**  
   * Pay attention to the `h1` page text that lists whose turn it is. 
   ![Player Turn Display](https://i.ibb.co/4d0Pd8f/Screen-Shot-2021-06-15-at-11-18-25-AM.png)
@@ -68,8 +66,6 @@ Put GIFFY here.
   * When it is your turn, `click` an open tic-tac-toe spot to place your token. 
   * Be aware - you may not steal your opponent's spot. Once placed, their token is immovable. 
   * To continue the game, choose an available spot and see your token appear.
-
-Put GIFFY here.
 
 * **Win a game:**  
   * To win a game be the first player to place 3 tokens in a row either diagonally, vertically or horizontally wins!
