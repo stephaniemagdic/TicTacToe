@@ -1,3 +1,4 @@
+/* --------------------------------------PAGE BODY---------------------------------------- */
 body {
   display: flex;
   justify-content: center;
@@ -30,16 +31,16 @@ fieldset {
 }
 
 select {
-  width: 45px;
   height: 45px;
+  width: 45px;
   font-size: 25px;
 }
 
 .token-display {
-  font-size: 30px;
-  text-align: center;
   width: 100%;
   margin-top: 20px;
+  text-align: center;
+  font-size: 30px;
 }
 
 .win-count {
@@ -80,8 +81,8 @@ h1 {
 }
 
 .game-board td {
-  width: 60px;
   height: 65px;
+  width: 60px;
   text-align: center;
   font-size: 40px;
 }
@@ -119,19 +120,18 @@ td > p {
 
 /* ----------------------------------------BUTTONS---------------------------------------- */
 button {
-  font-family: 'Quicksand', sans-serif;
-  font-size: 15px;
-  text-align: center;
   width: 110px;
-  border-radius:10px;
-  border: none;
   margin: 6px;
   padding: 6px;
+  text-align: center;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 15px;
+  font-color: black;
   background-color: #8DEEEE;
-  color: black;
+  border-radius:10px;
+  border-style: none;
 }
-/* ----------------------------------------------------------------------------------------- */
-
+/* ---------------------------------------MISC--------------------------------------------- */
 .disabled {
   cursor: not-allowed;
 }
