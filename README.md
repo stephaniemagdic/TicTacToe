@@ -42,7 +42,6 @@ You can access the game by `cloning this repo` and opening the `index.html` file
 
 ![Select a token gif](https://i.ibb.co/NSqRWLR/recording.gif)
 
-
 * **Add a win:**  
   * Use the `Add a win buttons` to add a win to the player's total wins. 
   * You might have taken a players turn or your teammate refreshed the page in frustration. No Worries. Use this button to add a win to your score at any time.
