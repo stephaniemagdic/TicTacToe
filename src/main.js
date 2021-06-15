@@ -38,9 +38,7 @@ player2WinAddButton.addEventListener("click", function() {
   updateWins(1, 1);
 });
 
-resetWinsButton.addEventListener("click", function() {
-  updateWins(0, "both");
-});
+resetWinsButton.addEventListener("click", clearWins);
 
 leftEmojiSelect.addEventListener("change", function(e) {
   updatePlayer1Token(e);
@@ -181,7 +179,17 @@ function addTokens(player1Token, player2Token) {
 }
 
 function updateWins(amt, playerIndex) {
-  currentGame.adjustWins(amt, playerIndex);
+  currentGame.players[playerIndex].adjustWins(amt);
+  currentGame.players[playerIndex].saveWinsToStorage();
+  renderPage();
+  updatePageText();
+}
+
+function clearWins() {
+  for (var i = 0; i < currentGame.players.length; i++) {
+    currentGame.players[i].resetWins()
+    currentGame.players[i].saveWinsToStorage();
+  }
   renderPage();
   updatePageText();
 }
