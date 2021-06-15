@@ -128,11 +128,15 @@ function updatePageText(outcome) {
   leftAsideText.innerHTML = `${currentGame.players[0].wins} wins`;
   rightAsideText.innerHTML = `${currentGame.players[1].wins} wins`;
   if (!outcome) {
-    trackerDisplay.innerText = `It's ${token}'s turn`;
+    trackerDisplay.innerHTML = `
+      <p>It's <span role="img" aria-label="current player token">${token}</span>'s turn</p>
+    `;
   } else if (outcome === "win") {
-    trackerDisplay.innerText= `${token}  won!`;
+    trackerDisplay.innerHTML = `
+      <p><span role="img" aria-label="current player token">${token}</span> won!</p>
+    `;
   } else if (outcome === "draw") {
-    trackerDisplay.innerText = `It's a draw!`;
+    trackerDisplay.innerHTML = `<p>It's a draw!</p>`;
   }
 }
 
