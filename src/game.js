@@ -79,9 +79,6 @@ class Game {
         var listToCheck = winningBoardSets[win];
         var isMatch = this.findBoardMatch(listToCheck);
         if (isMatch) {
-          //call method on player class here.
-            player.adjustWins(1)
-            // player.wins += 1;
             return "win";
         }
       }
