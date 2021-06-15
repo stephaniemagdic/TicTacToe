@@ -22,7 +22,7 @@ form {
 }
 
 legend {
-  font-size: 12px;
+  font-size: 15px;
 }
 
 fieldset {
@@ -30,6 +30,12 @@ fieldset {
   justify-content: center;
   border-radius: 10px;
   border: 1px solid #8DEEEE;
+}
+
+select {
+  width: 45px;
+  height: 45px;
+  font-size: 25px;
 }
 
 /* //player tokens might have a shared class */
@@ -45,6 +51,7 @@ fieldset {
 .player1-wins,
 .player2-wins {
   text-align: center;
+  font-size: 30px;
 }
 
 .middle {
@@ -52,12 +59,13 @@ fieldset {
   flex-direction: column;
   justify-content: center;
   height: 100vh;
-  flex: 2;
+  flex: 3;
   background-color: white;
 }
 
 h1 {
   text-align: center;
+  font-size: 40px;
 }
 
 .game-board {
@@ -83,6 +91,11 @@ h1 {
   width: 50px;
   height: 50px;
   text-align: center;
+  font-size: 40px;
+}
+
+td > p {
+  margin: 0;
   font-size: 40px;
 }
 
@@ -115,7 +128,7 @@ h1 {
 
 button {
   font-family: 'Quicksand', sans-serif;
-  font-size: 10px;
+  font-size: 15px;
   text-align: center;
   width: 80px;
   border-radius:10px;
@@ -124,6 +137,12 @@ button {
   padding: 6px;
   background-color: #8DEEEE;
   color: black;
+}
+
+.reset {
+  display: flex;
+  display: column;
+  justify-content: center;
 }
 
 .disabled {
