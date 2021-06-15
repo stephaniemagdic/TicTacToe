@@ -1,17 +1,17 @@
 //---------------------GLOBAL VARIABLES--------------------------------------//
-var leftAsideText = document.querySelector(".player1-wins");
-var rightAsideText = document.querySelector(".player2-wins");
-var leftAsideToken = document.querySelector(".player-1-token");
-var rightAsideToken = document.querySelector(".player-2-token");
-var trackerDisplay = document.querySelector(".turn-tracker-winner-display");
-var gameBoardSection = document.querySelector(".game-board");
-var resetWinsButton = document.querySelector(".reset-wins");
-var player1WinSubtractButton = document.querySelector(".subtract-win-player1");
-var player2WinSubtractButton = document.querySelector(".subtract-win-player2");
-var player1WinAddButton = document.querySelector(".add-win-player1");
-var player2WinAddButton = document.querySelector(".add-win-player2");
-var leftEmojiSelect = document.querySelector(".select-left");
-var rightEmojiSelect = document.querySelector(".select-right");
+var leftAsideText = document.querySelector("#player1Wins");
+var rightAsideText = document.querySelector("#player2Wins");
+var leftAsideToken = document.querySelector("#player1Token");
+var rightAsideToken = document.querySelector("#player2Token");
+var trackerDisplay = document.querySelector("#turnTrackerWinnerDisplay");
+var gameBoardSection = document.querySelector("#gameBoardSection");
+var resetWinsButton = document.querySelector("#reset");
+var player1WinSubtractButton = document.querySelector("#subtractWinPlayer1");
+var player2WinSubtractButton = document.querySelector("#subtractWinPlayer2");
+var player1WinAddButton = document.querySelector("#addWinPlayer1");
+var player2WinAddButton = document.querySelector("#addWinPlayer2");
+var leftEmojiSelect = document.querySelector("#selectLeft");
+var rightEmojiSelect = document.querySelector("#selectRight");
 var currentGame;
 
 //---------------------EVENT LISTENERS---------------------------------------//

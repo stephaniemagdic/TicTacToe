@@ -12,7 +12,7 @@
           <legend>
             Choose Your Token:
           </legend>
-          <select name="emoji-token" class="select-left">
+          <select name="emoji-token" id="selectLeft">
             <option value="🧗" alt="Person climbing" selected>🧗‍</option>
             <option value="🏂" alt="Snowboarder">🏂</option>
             <option value="🏄" alt="Person surfing">🏄</option>
@@ -23,20 +23,20 @@
           </select>
         </fieldset>
       </form>
-      <div class="player-1-token token-display"><!--token--></div>
-      <h2 class="player1-wins win-count"><!--will display number of wins--></h2>
-      <button class="add-win-player1">Add a win</button>
-      <button class="subtract-win-player1">Subtract a win</button>
+      <div class="token-display" id="player1Token"><!--token--></div>
+      <h2 class="win-count" id="player1Wins"><!--will display number of wins--></h2>
+      <button id="addWinPlayer1">Add a win</button>
+      <button id="subtractWinPlayer1">Subtract a win</button>
     </aside>
     <main class="middle game-display">
-      <h1 class="turn-tracker-winner-display">
+      <h1 id="turnTrackerWinnerDisplay">
         <!--will display turn tracker and round winner-->
       </h1>
-      <section class="game-board">
+      <section class="game-board" id="gameBoardSection">
         <!---Tic Tac Toe Board will go here --->
       </section>
       <div class="reset">
-        <button class="reset-wins">Reset Wins</button>
+        <button class="reset-wins" id="reset">Reset Wins</button>
       <div>
     </main>
     <aside class="right-side player-data">
@@ -45,7 +45,7 @@
          <legend>
            Choose Your Token:
          </legend>
-         <select name="emoji-token" class="select-right">
+         <select name="emoji-token" id="selectRight">
            <option value="🤺" alt="Person fencing" selected>🤺</option>
            <option value="⛷️" alt="Skier">⛷️</option>
            <option value="⛹️" alt="Person bouncing ball">⛹️</option>
@@ -56,10 +56,10 @@
          </select>
          </fieldset>
       </form>
-      <div class="player-2-token token-display"><!--token--></div>
-      <h2 class="player2-wins win-count"><!--will display number of wins--></h2>
-      <button class="add-win-player2">Add a win</button>
-      <button class="subtract-win-player2">Subtract a win</button>
+      <div class="token-display" id="player2Token"><!--token--></div>
+      <h2 class="win-count" id="player2Wins"><!--will display number of wins--></h2>
+      <button id="addWinPlayer2">Add a win</button>
+      <button id="subtractWinPlayer2">Subtract a win</button>
     </aside>
     <script type="text/javascript" src="src/data.js"></script>
     <script type="text/javascript" src="src/player.js"></script>
