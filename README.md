@@ -5,10 +5,9 @@ Tic Tac Toe brings the well-known pen-and-paper game to your device, so you can 
  * Tokens can be dynamically added to the tic-tac-toe board and checked for a winning array match or a draw. 
  * User data is updated on the page when the data model is modifed after a win, a draw, a player takes a turn, or a button is clicked.
  * This application uses localStorage to persist player wins. 
- * It has many reusable functions that use parameters that make the JavsaScript dynamic and clean.
- * The game uses event delegation to handle events on a higher level in the DOM to listen for dynamic elements.
- * The game can be played entirely in the console without the user interface, distinguishing the data model from the DOM and using the data model as it's source of truth as it updates the DOM. It also itterates through DOM elements to use our data model to update the page.
-
+ * It has many reusable functions that take arguments, making the JavsaScript dynamic and clean.
+ * Event delegation handles events on a higher level in the DOM to listen for dynamic elements.
+ * The game can be played entirely in the console without the user interface, distinguishing the data model from the DOM and using the data model as it's source of truth. The browser uses the instance of currentGame to hold all its data and our JavaScript itterates through DOM elements, pulling from the data held in our data model to update what is displayed on the page.
 
 
 ### Built-By:
@@ -19,7 +18,6 @@ Tic Tac Toe brings the well-known pen-and-paper game to your device, so you can 
 ### Project Manager
 
 [Heather Faerber](https://github.com/hfaerber)
-
 
 
 
