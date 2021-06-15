@@ -18,19 +18,15 @@ class Game {
     this.addPlayer(player1);
     this.addPlayer(player2);
     this.currentPlayersTurnIndex = 0;
-    if (localStorage.length) {
-      for (var i = 0; i < this.players.length; i++){
-        this.players[i].retrieveWinsFromStorage();
-      }
-    }
   }
 
   addPlayerPosition(position){
     if (this.currentPlayersTurnIndex === 0) {
       this.player1Positions.push(position);
-    } else if (this.currentPlayersTurnIndex === 1)
+    } else if (this.currentPlayersTurnIndex === 1) {
       this.player2Positions.push(position);
     }
+  }
 
   reset() {
     this.player1Positions = [];
@@ -54,22 +50,21 @@ class Game {
       var position = playerPositions[i];
       var match = currentWinList.includes(position);
       if (match) {
-            count += 1;
+        count += 1;
        }
     }
     if (count === 3) {
       isMatch = true;
     }
     return isMatch;
-   }
+  }
 
   checkOutcome() {
+    var player = this.players[this.currentPlayersTurnIndex];
     if (this.currentPlayersTurnIndex === 0) {
       var playerPositions = this.player1Positions;
-      var currentPlayer = this.players[0];
     } else if (this.currentPlayersTurnIndex === 1) {
       var playerPositions = this.player2Positions;
-      var currentPlayer = this.players[1];
     }
     if (playerPositions.length < 3) {
       return false;
@@ -79,17 +74,15 @@ class Game {
         var listToCheck = winningBoardSets[win];
         var isMatch = this.findBoardMatch(listToCheck);
         if (isMatch) {
-            currentPlayer.wins += 1;
-            currentPlayer.saveWinsToStorage();
-            return "win";
+          return "win";
         }
       }
-        if (this.totalTurnsTaken === 9) {
-          return "draw";
-        }
+      if (this.totalTurnsTaken === 9) {
+        return "draw";
+      }
     return false;
-      }
     }
+  }
 
   updateTurn() {
     if (this.currentPlayersTurnIndex === 0) {

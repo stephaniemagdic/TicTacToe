@@ -18,24 +18,28 @@ var currentGame;
 window.addEventListener("load", createBoard);
 gameBoardSection.addEventListener("click", function(e) {
   if (e.target.classList.contains("open-position") && !e.target.innerText) {
-      takeTurn(e);
+    takeTurn(e);
   }
 });
 
 player1WinSubtractButton.addEventListener("click", function() {
   updateWins(-1, 0);
+  updatePage();
 });
 
 player2WinSubtractButton.addEventListener("click", function() {
   updateWins(-1, 1);
+  updatePage();
 });
 
 player1WinAddButton.addEventListener("click", function() {
   updateWins(1, 0);
+  updatePage();
 });
 
 player2WinAddButton.addEventListener("click", function() {
   updateWins(1, 1);
+  updatePage();
 });
 
 resetWinsButton.addEventListener("click", clearWins);
@@ -43,7 +47,6 @@ resetWinsButton.addEventListener("click", clearWins);
 leftEmojiSelect.addEventListener("change", function(e) {
   updatePlayer1Token(e);
 });
-//  updatePlayer1(e, currentGame);
 
 rightEmojiSelect.addEventListener("change", function(e) {
   updatePlayer2Token(e);
@@ -52,13 +55,19 @@ rightEmojiSelect.addEventListener("change", function(e) {
 //---------------------FUNCTIONS---------------------------------------------//
 function createBoard() {
   currentGame = new Game();
-  // var player1DefaultToken = leftEmojiSelect.selectedOptions[0].value;
   var player1DefaultToken = `🧗`;
   var player2DefaultToken = `🤺`;
-  // var player2DefaultToken = leftEmojiSelect.selectedOptions[1].value;
   currentGame.setUp(player1DefaultToken, player2DefaultToken);
-  renderPage();
-  updatePageText();
+  checkLocalStorage();
+  updatePage();
+}
+
+function checkLocalStorage(){
+  if (localStorage.length) {
+    for (var i = 0; i < currentGame.players.length; i++){
+      currentGame.players[i].retrieveWinsFromStorage();
+    }
+  }
 }
 
 function renderPage() {
@@ -101,32 +110,26 @@ function renderPage() {
   addTokens(token1, token2);
 }
 
-// function updatePlayer1(e, game)
-function updatePlayer1Token(e) {
-  var emoji = e.target.value;
-  currentGame.players[0].token = emoji;
-  renderPage();
-  updatePageText();
-}
-
-function updatePlayer2Token(e) {
-  var emoji = e.target.value;
-  currentGame.players[1].token = emoji;
-  renderPage();
-  updatePageText();
-}
-
 function updatePageText(outcome) {
   var token = currentGame.players[currentGame.currentPlayersTurnIndex].token;
   leftAsideText.innerHTML = `${currentGame.players[0].wins} wins`;
   rightAsideText.innerHTML = `${currentGame.players[1].wins} wins`;
   if (!outcome) {
-    trackerDisplay.innerText = `It's ${token}'s turn`;
+    trackerDisplay.innerHTML = `
+      <p>It's <span role="img" aria-label="current player token">${token}</span>'s turn</p>
+    `;
   } else if (outcome === "win") {
-    trackerDisplay.innerText= `${token}  won!`;
+    trackerDisplay.innerHTML = `
+      <p><span role="img" aria-label="current player token">${token}</span> won!</p>
+    `;
   } else if (outcome === "draw") {
-    trackerDisplay.innerText = `It's a draw!`;
+    trackerDisplay.innerHTML = `<p>It's a draw!</p>`;
   }
+}
+
+function updatePage() {
+  renderPage();
+  updatePageText();
 }
 
 function takeTurn(e) {
@@ -134,8 +137,11 @@ function takeTurn(e) {
   currentGame.addPlayerPosition(positionSelected);
   renderPage();
   currentGame.addTurn();
-//check if three turns taken?
   var outcome = currentGame.checkOutcome();
+  if (outcome === "win") {
+    var playerIndex = currentGame.currentPlayersTurnIndex;
+    updateWins(1, playerIndex);
+  }
   if (!outcome) {
     switchTurns(outcome);
   } else {
@@ -153,7 +159,7 @@ function switchTurns(outcome) {
 }
 
 function showResult(outcome) {
-    updatePageText(outcome)
+    updatePageText(outcome);
     currentGame.reset();
     preventClick();
     setTimeout(function() {
@@ -173,11 +179,13 @@ function addTokens(player1Token, player2Token) {
   var boardPositions = document.querySelectorAll('td');
   for (var i = 0; i < boardPositions.length; i ++) {
     if (currentGame.player1Positions.includes(boardPositions[i].id)) {
-      boardPositions[i].innerHTML = `<p role="img" aria-label="player1-token">${player1Token}</p>`
-      // boardPositions[i].innerText = `${player1Token}`;
+      boardPositions[i].innerHTML = `
+        <p role="img" aria-label="player1-token">${player1Token}</p>
+      `;
     } else if (currentGame.player2Positions.includes(boardPositions[i].id)) {
-      boardPositions[i].innerHTML = `<p role="img" aria-label="player2-token">${player2Token}</p>`
-      // boardPositions[i].innerText = `${player2Token}`;
+      boardPositions[i].innerHTML = `
+        <p role="img" aria-label="player2-token">${player2Token}</p>
+      `;
     }
   }
 }
@@ -185,15 +193,24 @@ function addTokens(player1Token, player2Token) {
 function updateWins(amt, playerIndex) {
   currentGame.players[playerIndex].adjustWins(amt);
   currentGame.players[playerIndex].saveWinsToStorage();
-  renderPage();
-  updatePageText();
 }
 
 function clearWins() {
   for (var i = 0; i < currentGame.players.length; i++) {
-    currentGame.players[i].resetWins()
+    currentGame.players[i].resetWins();
     currentGame.players[i].saveWinsToStorage();
   }
-  renderPage();
-  updatePageText();
+  updatePage();
+}
+
+function updatePlayer1Token(e) {
+  var emoji = e.target.value;
+  currentGame.players[0].token = emoji;
+  updatePage();
+}
+
+function updatePlayer2Token(e) {
+  var emoji = e.target.value;
+  currentGame.players[1].token = emoji;
+  updatePage();
 }
