@@ -7,7 +7,7 @@ Tic Tac Toe brings the well-known pen-and-paper game to your device, so you can 
 
 ### Built-By:
 
-[Stephanie M](https://github.com/stephaniemagdic)
+[Stephanie Magdic](https://github.com/stephaniemagdic)
 
 
 ### Project Manager
@@ -29,10 +29,15 @@ JavaScript
 
 You can play Tic Tac Toe here. [x](x) 
 
-* **Choose a token:**  xxx
+* **Choose a token:**  
+* Use the drop down to choose a token from a list of 7 possible player tokens. Depending on if you choose to be player 1 or player 2, you will have different activity-themed tokens to choose from.
+* If you do not select a token, your will recieve a default player token of the first option in the list.
+* If you choose, you may select a new token in the middle of the game, and your player tokens on the game board will reflect your new token. 
 
 
 Put GIFFY here.
+
+![Select a token gif](https://i.ibb.co/NSqRWLR/recording.gif)
 
 
 * **Add a win:**  xxx
@@ -67,4 +72,7 @@ Put GIFFY here.
 
 
 ## More GIPHY's here.
+
+### Challenges 
+### Wins
 
