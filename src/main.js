@@ -43,7 +43,6 @@ resetWinsButton.addEventListener("click", clearWins);
 leftEmojiSelect.addEventListener("change", function(e) {
   updatePlayer1Token(e);
 });
-//  updatePlayer1(e, currentGame);
 
 rightEmojiSelect.addEventListener("change", function(e) {
   updatePlayer2Token(e);
@@ -110,7 +109,6 @@ function renderPage() {
   addTokens(token1, token2);
 }
 
-// function updatePlayer1(e, game)
 function updatePlayer1Token(e) {
   var emoji = e.target.value;
   currentGame.players[0].token = emoji;
@@ -146,14 +144,19 @@ function takeTurn(e) {
 //check if three turns taken?
   var outcome = currentGame.checkOutcome();
   if (outcome === "win") {
-    currentGame.players[currentGame.currentPlayersTurnIndex].adjustWins(1);
-    currentGame.players[currentGame.currentPlayersTurnIndex].saveWinsToStorage();
+    addWin();
   }
   if (!outcome) {
     switchTurns(outcome);
   } else {
     showResult(outcome);
   }
+}
+
+function addWin() {
+  var player = currentGame.players[currentGame.currentPlayersTurnIndex]
+  player.adjustWins(1);
+  player.saveWinsToStorage();
 }
 
 function switchTurns(outcome) {
