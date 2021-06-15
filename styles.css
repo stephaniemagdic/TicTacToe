@@ -13,8 +13,22 @@ body {
   align-items: center;
   height: 100vh;
   flex: 1;
-  background-color: blue;
-  background-color: #FCF6CF;
+  background-color: #F2F2F2;
+}
+
+form {
+  margin-top: 25px;
+}
+
+legend {
+  font-size: 12px;
+}
+
+fieldset {
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid #8DEEEE;
 }
 
 .player-1-token,
@@ -98,12 +112,12 @@ button {
   font-family: 'Quicksand', sans-serif;
   font-size: 10px;
   text-align: center;
-  width: 60px;
+  width: 80px;
   border-radius:10px;
   border: none;
   margin: 6px;
   padding: 6px;
-  background-color: #EBECE4;
+  background-color: #8DEEEE;
   color: black;
 }
 
