@@ -45,6 +45,7 @@ resetWinsButton.addEventListener("click", function() {
 leftEmojiSelect.addEventListener("change", function(e) {
   updatePlayer1(e);
 });
+//  updatePlayer1(e, currentGame);
 
 rightEmojiSelect.addEventListener("change", function(e) {
   updatePlayer2(e);
@@ -101,6 +102,7 @@ function renderPage() {
   addTokens();
 }
 
+// function updatePlayer1(e, game)
 function updatePlayer1(e) {
   var emoji = e.target.value;
   currentGame.players[0].token = emoji;
@@ -116,7 +118,7 @@ function updatePlayer2(e) {
 }
 
 function updatePageText(outcome) {
-  var token = currentGame.players[currentGame.currentTurnIndexPosition].token;
+  var token = currentGame.players[currentGame.currentPlayersTurnIndex].token;
   leftAsideText.innerHTML = `${currentGame.players[0].wins} wins`;
   rightAsideText.innerHTML = `${currentGame.players[1].wins} wins`;
   if (!outcome) {
@@ -131,13 +133,13 @@ function updatePageText(outcome) {
 function takeTurn(e) {
   var positionSelected = e.target.id;
 
-  if (currentGame.currentTurnIndexPosition === 0) {
+  if (currentGame.currentPlayersTurnIndex === 0) {
     var currentPlayerPositions = currentGame.player1Positions;
-  } else if (currentGame.currentTurnIndexPosition === 1) {
+  } else if (currentGame.currentPlayersTurnIndex === 1) {
     var currentPlayerPositions = currentGame.player2Positions;
   }
 
-  // var currentPlayerPositions = currentGame.players[currentGame.currentTurnIndexPosition].takenPositions;
+  // var currentPlayerPositions = currentGame.players[currentGame.currentPlayersTurnIndex].takenPositions;
 
 
   currentPlayerPositions.push(positionSelected);

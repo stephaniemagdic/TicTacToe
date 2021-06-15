@@ -1,8 +1,7 @@
 class Game {
   constructor() {
     this.players = [];
-    // this.currentTurnIndexPosition = 0;
-    this.currentTurnIndexPosition = 0;
+    this.currentPlayersTurnIndex = 0;
     this.totalTurnsTaken = 0;
     this.player1Positions = [];
     this.player2Positions = [];
@@ -18,7 +17,7 @@ class Game {
     var player2 = new Player(2, player2Token, 0);
     this.addPlayer(player1);
     this.addPlayer(player2);
-    this.currentTurnIndexPosition = 0;
+    this.currentPlayersTurnIndex = 0;
     if (localStorage.length) {
       for (var i = 0; i < this.players.length; i++){
         this.players[i].retrieveWinsFromStorage();
@@ -27,11 +26,11 @@ class Game {
   }
 
   addPlayerPosition(position){
-    if (this.currentTurnIndexPosition === 0) {
+    if (this.currentPlayersTurnIndex === 0) {
       this.player1Positions.push(position);
-    } else if (this.currentTurnIndexPosition === 1)
+    } else if (this.currentPlayersTurnIndex === 1)
       this.player2Positions.push(position);
-      // this.players[this.currentTurnIndexPosition].takenPositions.push(position);
+      // this.players[this.currentPlayersTurnIndex].takenPositions.push(position);
     }
 
   reset() {
@@ -50,13 +49,13 @@ class Game {
   findMatch(currentWinList) {
     var count = 0;
     var scenarioMatch = false;
-    if (this.currentTurnIndexPosition === 0) {
+    if (this.currentPlayersTurnIndex === 0) {
       var playerPositions = this.player1Positions;
-    } else if (this.currentTurnIndexPosition === 1) {
+    } else if (this.currentPlayersTurnIndex === 1) {
       var playerPositions = this.player2Positions;
     }
 
-    // var playersPositions = this.players[this.currentTurnIndexPosition].takenPositions;
+    // var playersPositions = this.players[this.currentPlayersTurnIndex].takenPositions;
     for (var i = 0; i < playerPositions.length; i ++) {
       var position = playerPositions[i];
       var match = currentWinList.includes(position);
@@ -71,10 +70,10 @@ class Game {
    }
 
   checkOutcome() {
-    if (this.currentTurnIndexPosition === 0) {
+    if (this.currentPlayersTurnIndex === 0) {
       var playerPositions = this.player1Positions;
       var currentPlayer = this.players[0];
-    } else if (this.currentTurnIndexPosition === 1) {
+    } else if (this.currentPlayersTurnIndex === 1) {
       var playerPositions = this.player2Positions;
       var currentPlayer = this.players[1];
     }
@@ -101,10 +100,10 @@ class Game {
     }
 
   updateTurn() {
-    if (this.currentTurnIndexPosition === 0) {
-      this.currentTurnIndexPosition = 1;
-    } else if (this.currentTurnIndexPosition === 1) {
-      this.currentTurnIndexPosition = 0;
+    if (this.currentPlayersTurnIndex === 0) {
+      this.currentPlayersTurnIndex = 1;
+    } else if (this.currentPlayersTurnIndex === 1) {
+      this.currentPlayersTurnIndex = 0;
     }
   }
 
