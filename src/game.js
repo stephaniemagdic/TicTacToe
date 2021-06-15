@@ -18,6 +18,7 @@ class Game {
     this.addPlayer(player1);
     this.addPlayer(player2);
     this.currentPlayersTurnIndex = 0;
+    //should this be outside of my method.
     if (localStorage.length) {
       for (var i = 0; i < this.players.length; i++){
         this.players[i].retrieveWinsFromStorage();
@@ -64,12 +65,11 @@ class Game {
    }
 
   checkOutcome() {
+    var player = this.players[this.currentPlayersTurnIndex];
     if (this.currentPlayersTurnIndex === 0) {
       var playerPositions = this.player1Positions;
-      var currentPlayer = this.players[0];
     } else if (this.currentPlayersTurnIndex === 1) {
       var playerPositions = this.player2Positions;
-      var currentPlayer = this.players[1];
     }
     if (playerPositions.length < 3) {
       return false;
@@ -79,8 +79,8 @@ class Game {
         var listToCheck = winningBoardSets[win];
         var isMatch = this.findBoardMatch(listToCheck);
         if (isMatch) {
-            currentPlayer.wins += 1;
-            currentPlayer.saveWinsToStorage();
+          //call method on player class here.
+            player.wins += 1;
             return "win";
         }
       }

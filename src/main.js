@@ -136,6 +136,9 @@ function takeTurn(e) {
   currentGame.addTurn();
 //check if three turns taken?
   var outcome = currentGame.checkOutcome();
+  if (outcome === "win") {
+    currentGame.players[currentGame.currentPlayersTurnIndex].saveWinsToStorage();
+  }
   if (!outcome) {
     switchTurns(outcome);
   } else {
