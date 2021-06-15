@@ -77,10 +77,10 @@ You can access the game by `cloning this repo` and opening the `index.html` file
 ![Subtract a win gif](https://i.ibb.co/CJZdLx9/subtract-a-win.gif)
 
 
-### Challenges 
+### Project Challenges 
  * One challenge I faced was when I noticed Monday night that my Game class was technically using a method on its class to update a property in the Player class by using the instances it was holding in it's class. This violated the single responsibility principle. I am grateful I ran into this, as it helped me further grasp this concept of SRP. It reminded me that classes should only hold static information about the class or properties the class itself is updating. I also learned to keep this question in mind: `Does the class need to know about the information (in order to update use/manipulate it)?` If so, it might need to be a property on that class. Because of this I made sure methods were updating their class properties only and then updated my main.js file to call those methods accordingly.
  
-### Wins
+### Project Wins
  * I planned out each piece of functionality this project needed and thought through all of the logic of this game before even touching any code. I spent about 3 days to really have a well-thought-out plan. This saved me from too much frustration or confusion and the process felt smoooth and enjoyable.
  * My Game and Player class are fully functional on their own. The Data model is held in the instance of the currentGame and is the only thing needed to run the app. The user interface uses the classes as its data model to update the DOM/what the user sees.
 
