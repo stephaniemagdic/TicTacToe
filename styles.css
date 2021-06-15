@@ -1,74 +1,98 @@
+/* --------------------------------------PAGE BODY---------------------------------------- */
 body {
   display: flex;
   justify-content: center;
   font-family: 'Quicksand', sans-serif;
 }
 
-.left,
-.right,
-.left-side,
-.right-side {
+/* ---------------------------------PLAYER DATA ASIDES------------------------------------ */
+.player-data {
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100vh;
   flex: 1;
-  background-color: blue;
-  background-color: #FCF6CF;
+  background-color: #F2F2F2;
 }
 
-.player-1-token,
-.player-2-token {
-  font-size: 30px;
-  text-align: center;
+form {
+  margin-top: 25px;
+}
+
+legend {
+  font-size: 15px;
+}
+
+fieldset {
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid #8DEEEE;
+}
+
+select {
+  height: 45px;
+  width: 45px;
+  font-size: 25px;
+}
+
+.token-display {
   width: 100%;
   margin-top: 20px;
-}
-
-.player1-wins,
-.player2-wins {
   text-align: center;
+  font-size: 30px;
 }
 
-.middle {
+.win-count {
+  text-align: center;
+  font-size: 30px;
+}
+
+/* ---------------------------------GAME BOARD DISPLAY MAIN------------------------------------ */
+.game-display {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
   height: 100vh;
-  flex: 2;
-  background-color: white;
+  flex: 2.5;
 }
 
 h1 {
   text-align: center;
+  font-size: 60px;
 }
 
 .game-board {
   display: flex;
   flex-direction: column;
   flex: 5;
+  align-self: stretch;
 }
 
-.table {
+.game-board > .table {
   height: 100%;
-  width: 100%;
-  flex: 1;
   padding: 20px;
   background-color: white;
   border-spacing: 0;
 }
 
 .game-board tr {
-  height: 50px;
+  height: 65px;
 }
 
 .game-board td {
-  width: 50px;
-  height: 50px;
+  height: 65px;
+  width: 60px;
   text-align: center;
   font-size: 40px;
 }
 
+td > p {
+  margin: 0;
+  font-size: 55px;
+}
+
+/* ---------------------------------GAME BOARD SPOTS------------------------------------ */
 .corner-left-style,
 .left-style {
   border-right: 2px solid black;
@@ -94,19 +118,20 @@ h1 {
   border-left: 2px solid black;
 }
 
+/* ----------------------------------------BUTTONS---------------------------------------- */
 button {
-  font-family: 'Quicksand', sans-serif;
-  font-size: 10px;
-  text-align: center;
-  width: 60px;
-  border-radius:10px;
-  border: none;
+  width: 110px;
   margin: 6px;
   padding: 6px;
-  background-color: #EBECE4;
-  color: black;
+  text-align: center;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 15px;
+  font-color: black;
+  background-color: #8DEEEE;
+  border-radius:10px;
+  border-style: none;
 }
-
+/* ---------------------------------------MISC--------------------------------------------- */
 .disabled {
   cursor: not-allowed;
 }
