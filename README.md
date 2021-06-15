@@ -69,12 +69,12 @@ You can access the game by `cloning this repo` and opening the `index.html` file
 * **Win a game:**  
   * To win a game be the first player to place 3 tokens in a row either diagonally, vertically or horizontally wins!
   * When you win a game, your wins will be updated and you wil be notified of your win at the top of the page! 
-  * ![Player Win Notification](https://i.ibb.co/xq0Fvpg/win-notification.png)
+  ![Player Win Notification](https://i.ibb.co/xq0Fvpg/win-notification.png)
 
 
 * **Draw:**  
- * When all spaces are taken up with player tokens, it will be a draw - no winners!
- * Your gameboard will be reset and a new game will be ready to play for a win! 
+  * When all spaces are taken up with player tokens, it will be a draw - no winners!
+  * Your gameboard will be reset and a new game will be ready to play for a win! 
 
 ![Subtract a win gif](https://i.ibb.co/CJZdLx9/subtract-a-win.gif)
 
