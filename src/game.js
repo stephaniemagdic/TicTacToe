@@ -1,10 +1,11 @@
 class Game {
   constructor() {
     this.players = [];
+    // this.currentTurnIndexPosition = 0;
     this.currentTurnIndexPosition = 0;
     this.totalTurnsTaken = 0;
-    //this.player1Positions;
-    //this.player2Positions;
+    this.player1Positions = [];
+    this.player2Positions = [];
   }
 
   addPlayer(player) {
@@ -26,13 +27,19 @@ class Game {
   }
 
   addPlayerPosition(position){
-    this.players[this.currentTurnIndexPosition].takenPositions.push(position);
-  }
+    if (this.currentTurnIndexPosition === 0) {
+      this.player1Positions.push(position);
+    } else if (this.currentTurnIndexPosition === 1)
+      this.player2Positions.push(position);
+      // this.players[this.currentTurnIndexPosition].takenPositions.push(position);
+    }
 
   reset() {
-    for (var i = 0; i < this.players.length; i ++) {
-      this.players[i].takenPositions = [];
-    }
+    this.player1Positions = [];
+    this.player2Positions = [];
+    // for (var i = 0; i < this.players.length; i ++) {
+    //   this.players[i].takenPositions = [];
+    // }
     this.totalTurnsTaken = 0;
   }
 
@@ -43,9 +50,15 @@ class Game {
   findMatch(currentWinList) {
     var count = 0;
     var scenarioMatch = false;
-    var playersPositions = this.players[this.currentTurnIndexPosition].takenPositions;
-    for (var i = 0; i < playersPositions.length; i ++) {
-      var position = playersPositions[i];
+    if (this.currentTurnIndexPosition === 0) {
+      var playerPositions = this.player1Positions;
+    } else if (this.currentTurnIndexPosition === 1) {
+      var playerPositions = this.player2Positions;
+    }
+
+    // var playersPositions = this.players[this.currentTurnIndexPosition].takenPositions;
+    for (var i = 0; i < playerPositions.length; i ++) {
+      var position = playerPositions[i];
       var match = currentWinList.includes(position);
       if (match) {
             count += 1;
@@ -58,12 +71,19 @@ class Game {
    }
 
   checkOutcome() {
-    var currentPlayer = this.players[this.currentTurnIndexPosition];
+    if (this.currentTurnIndexPosition === 0) {
+      var playerPositions = this.player1Positions;
+      var currentPlayer = this.players[0];
+    } else if (this.currentTurnIndexPosition === 1) {
+      var playerPositions = this.player2Positions;
+      var currentPlayer = this.players[1];
+    }
+    // var currentPlayer = this.players[this.currentTurnIndexPosition];
     //move this to dom function.
-    if (currentPlayer.takenPositions.length < 3) {
+    if (playerPositions.length < 3) {
       return false;
     }
-    if (currentPlayer.takenPositions.length > 2) {
+    if (playerPositions.length > 2) {
       for (var win in winningBoardSets) {
         var listToCheck = winningBoardSets[win];
         var isMatch = this.findMatch(listToCheck);

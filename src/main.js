@@ -130,7 +130,16 @@ function updatePageText(outcome) {
 
 function takeTurn(e) {
   var positionSelected = e.target.id;
-  var currentPlayerPositions = currentGame.players[currentGame.currentTurnIndexPosition].takenPositions;
+
+  if (currentGame.currentTurnIndexPosition === 0) {
+    var currentPlayerPositions = currentGame.player1Positions;
+  } else if (currentGame.currentTurnIndexPosition === 1) {
+    var currentPlayerPositions = currentGame.player2Positions;
+  }
+
+  // var currentPlayerPositions = currentGame.players[currentGame.currentTurnIndexPosition].takenPositions;
+
+
   currentPlayerPositions.push(positionSelected);
   renderPage();
   currentGame.addTurn();
@@ -178,9 +187,9 @@ function addTokens() {
   var token2 = currentGame.players[1].token;
   var boardSpots = document.querySelectorAll('td');
   for (var i = 0; i < boardSpots.length; i ++) {
-    if (currentGame.players[0].takenPositions.includes(boardSpots[i].id)) {
+    if (currentGame.player1Positions.includes(boardSpots[i].id)) {
       boardSpots[i].innerText = `${token1}`;
-    } else if (currentGame.players[1].takenPositions.includes(boardSpots[i].id)) {
+    } else if (currentGame.player2Positions.includes(boardSpots[i].id)) {
       boardSpots[i].innerText = `${token2}`;
     }
   }

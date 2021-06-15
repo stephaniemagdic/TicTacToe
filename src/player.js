@@ -3,7 +3,7 @@ class Player {
     this.id = id;
     this.token = token;
     this.wins = wins;
-    this.takenPositions = [];
+    // this.takenPositions = [];
   }
 
   saveWinsToStorage() {
