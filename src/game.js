@@ -3,6 +3,8 @@ class Game {
     this.players = [];
     this.currentTurnIndexPosition = 0;
     this.totalTurnsTaken = 0;
+    //this.player1Positions;
+    //this.player2Positions;
   }
 
   addPlayer(player) {
