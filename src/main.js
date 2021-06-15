@@ -24,18 +24,22 @@ gameBoardSection.addEventListener("click", function(e) {
 
 player1WinSubtractButton.addEventListener("click", function() {
   updateWins(-1, 0);
+  updatePage();
 });
 
 player2WinSubtractButton.addEventListener("click", function() {
   updateWins(-1, 1);
+  updatePage();
 });
 
 player1WinAddButton.addEventListener("click", function() {
   updateWins(1, 0);
+  updatePage();
 });
 
 player2WinAddButton.addEventListener("click", function() {
   updateWins(1, 1);
+  updatePage();
 });
 
 resetWinsButton.addEventListener("click", clearWins);
@@ -152,19 +156,14 @@ function takeTurn(e) {
 //check if three turns taken?
   var outcome = currentGame.checkOutcome();
   if (outcome === "win") {
-    addWin();
+    var playerIndex = currentGame.currentPlayersTurnIndex;
+    updateWins(1, playerIndex);
   }
   if (!outcome) {
     switchTurns(outcome);
   } else {
     showResult(outcome);
   }
-}
-
-function addWin() {
-  var player = currentGame.players[currentGame.currentPlayersTurnIndex];
-  player.adjustWins(1);
-  player.saveWinsToStorage();
 }
 
 function switchTurns(outcome) {
@@ -197,9 +196,13 @@ function addTokens(player1Token, player2Token) {
   var boardPositions = document.querySelectorAll('td');
   for (var i = 0; i < boardPositions.length; i ++) {
     if (currentGame.player1Positions.includes(boardPositions[i].id)) {
-      boardPositions[i].innerHTML = `<p role="img" aria-label="player1-token">${player1Token}</p>`;
+      boardPositions[i].innerHTML = `
+        <p role="img" aria-label="player1-token">${player1Token}</p>
+      `;
     } else if (currentGame.player2Positions.includes(boardPositions[i].id)) {
-      boardPositions[i].innerHTML = `<p role="img" aria-label="player2-token">${player2Token}</p>`;
+      boardPositions[i].innerHTML = `
+        <p role="img" aria-label="player2-token">${player2Token}</p>
+      `;
     }
   }
 }
@@ -207,7 +210,6 @@ function addTokens(player1Token, player2Token) {
 function updateWins(amt, playerIndex) {
   currentGame.players[playerIndex].adjustWins(amt);
   currentGame.players[playerIndex].saveWinsToStorage();
-  updatePage();
 }
 
 function clearWins() {
