@@ -110,7 +110,6 @@ function renderPage() {
   addTokens(token1, token2);
 }
 
-
 function updatePageText(outcome) {
   var token = currentGame.players[currentGame.currentPlayersTurnIndex].token;
   leftAsideText.innerHTML = `${currentGame.players[0].wins} wins`;
