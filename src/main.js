@@ -57,8 +57,17 @@ function createBoard() {
   var player2DefaultToken = `🤺`;
   // var player2DefaultToken = leftEmojiSelect.selectedOptions[1].value;
   currentGame.setUp(player1DefaultToken, player2DefaultToken);
+  checkLocalStorage();
   renderPage();
   updatePageText();
+}
+
+function checkLocalStorage(){
+  if (localStorage.length) {
+    for (var i = 0; i < currentGame.players.length; i++){
+      currentGame.players[i].retrieveWinsFromStorage();
+    }
+  }
 }
 
 function renderPage() {

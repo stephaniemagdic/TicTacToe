@@ -18,12 +18,6 @@ class Game {
     this.addPlayer(player1);
     this.addPlayer(player2);
     this.currentPlayersTurnIndex = 0;
-    //should this be outside of my method.
-    if (localStorage.length) {
-      for (var i = 0; i < this.players.length; i++){
-        this.players[i].retrieveWinsFromStorage();
-      }
-    }
   }
 
   addPlayerPosition(position){
