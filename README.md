@@ -55,6 +55,8 @@ You can access the game by `cloning this repo` and opening the `index.html` file
 * **Reset all wins:**  
   * Use the `Reset Wins button` to reset both players wins and start fresh.
   * You might find yourself coming back to the game on your next roadtrip to find that the data from the previous session's games are stored. Simply use the reset wins button to clear all wins rather than finagling with the add and subtract win buttons. 
+  
+  
     ![Reset Wins Image](https://i.ibb.co/QctJ5fh/reset-wins.png)
   
 
