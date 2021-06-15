@@ -57,8 +57,7 @@ function createBoard() {
   // var player2DefaultToken = leftEmojiSelect.selectedOptions[1].value;
   currentGame.setUp(player1DefaultToken, player2DefaultToken);
   checkLocalStorage();
-  renderPage();
-  updatePageText();
+  updatePage();
 }
 
 function checkLocalStorage(){
@@ -109,19 +108,6 @@ function renderPage() {
   addTokens(token1, token2);
 }
 
-function updatePlayer1Token(e) {
-  var emoji = e.target.value;
-  currentGame.players[0].token = emoji;
-  renderPage();
-  updatePageText();
-}
-
-function updatePlayer2Token(e) {
-  var emoji = e.target.value;
-  currentGame.players[1].token = emoji;
-  renderPage();
-  updatePageText();
-}
 
 function updatePageText(outcome) {
   var token = currentGame.players[currentGame.currentPlayersTurnIndex].token;
@@ -138,6 +124,24 @@ function updatePageText(outcome) {
   } else if (outcome === "draw") {
     trackerDisplay.innerHTML = `<p>It's a draw!</p>`;
   }
+}
+
+function updatePage() {
+  renderPage();
+  updatePageText();
+}
+
+
+function updatePlayer1Token(e) {
+  var emoji = e.target.value;
+  currentGame.players[0].token = emoji;
+  updatePage();
+}
+
+function updatePlayer2Token(e) {
+  var emoji = e.target.value;
+  currentGame.players[1].token = emoji;
+  updatePage();
 }
 
 function takeTurn(e) {
@@ -194,10 +198,8 @@ function addTokens(player1Token, player2Token) {
   for (var i = 0; i < boardPositions.length; i ++) {
     if (currentGame.player1Positions.includes(boardPositions[i].id)) {
       boardPositions[i].innerHTML = `<p role="img" aria-label="player1-token">${player1Token}</p>`;
-      // boardPositions[i].innerText = `${player1Token}`;
     } else if (currentGame.player2Positions.includes(boardPositions[i].id)) {
       boardPositions[i].innerHTML = `<p role="img" aria-label="player2-token">${player2Token}</p>`;
-      // boardPositions[i].innerText = `${player2Token}`;
     }
   }
 }
@@ -205,8 +207,7 @@ function addTokens(player1Token, player2Token) {
 function updateWins(amt, playerIndex) {
   currentGame.players[playerIndex].adjustWins(amt);
   currentGame.players[playerIndex].saveWinsToStorage();
-  renderPage();
-  updatePageText();
+  updatePage();
 }
 
 function clearWins() {
@@ -214,6 +215,5 @@ function clearWins() {
     currentGame.players[i].resetWins();
     currentGame.players[i].saveWinsToStorage();
   }
-  renderPage();
-  updatePageText();
+  updatePage();
 }
