@@ -1,10 +1,10 @@
 class Game {
   constructor() {
     this.players = [];
-    this.currentTurnIndexPosition = 0;
+    this.currentPlayersTurnIndex = 0;
     this.totalTurnsTaken = 0;
-    //this.player1Positions;
-    //this.player2Positions;
+    this.player1Positions = [];
+    this.player2Positions = [];
   }
 
   addPlayer(player) {
@@ -17,7 +17,7 @@ class Game {
     var player2 = new Player(2, player2Token, 0);
     this.addPlayer(player1);
     this.addPlayer(player2);
-    this.currentTurnIndexPosition = 0;
+    this.currentPlayersTurnIndex = 0;
     if (localStorage.length) {
       for (var i = 0; i < this.players.length; i++){
         this.players[i].retrieveWinsFromStorage();
@@ -26,13 +26,15 @@ class Game {
   }
 
   addPlayerPosition(position){
-    this.players[this.currentTurnIndexPosition].takenPositions.push(position);
-  }
+    if (this.currentPlayersTurnIndex === 0) {
+      this.player1Positions.push(position);
+    } else if (this.currentPlayersTurnIndex === 1)
+      this.player2Positions.push(position);
+    }
 
   reset() {
-    for (var i = 0; i < this.players.length; i ++) {
-      this.players[i].takenPositions = [];
-    }
+    this.player1Positions = [];
+    this.player2Positions = [];
     this.totalTurnsTaken = 0;
   }
 
@@ -40,33 +42,42 @@ class Game {
     this.totalTurnsTaken += 1;
   }
 
-  findMatch(currentWinList) {
+  findBoardMatch(currentWinList) {
     var count = 0;
-    var scenarioMatch = false;
-    var playersPositions = this.players[this.currentTurnIndexPosition].takenPositions;
-    for (var i = 0; i < playersPositions.length; i ++) {
-      var position = playersPositions[i];
+    var isMatch = false;
+    if (this.currentPlayersTurnIndex === 0) {
+      var playerPositions = this.player1Positions;
+    } else if (this.currentPlayersTurnIndex === 1) {
+      var playerPositions = this.player2Positions;
+    }
+    for (var i = 0; i < playerPositions.length; i ++) {
+      var position = playerPositions[i];
       var match = currentWinList.includes(position);
       if (match) {
             count += 1;
        }
     }
     if (count === 3) {
-      scenarioMatch = true;
+      isMatch = true;
     }
-    return scenarioMatch;
+    return isMatch;
    }
 
   checkOutcome() {
-    var currentPlayer = this.players[this.currentTurnIndexPosition];
-    //move this to dom function.
-    if (currentPlayer.takenPositions.length < 3) {
+    if (this.currentPlayersTurnIndex === 0) {
+      var playerPositions = this.player1Positions;
+      var currentPlayer = this.players[0];
+    } else if (this.currentPlayersTurnIndex === 1) {
+      var playerPositions = this.player2Positions;
+      var currentPlayer = this.players[1];
+    }
+    if (playerPositions.length < 3) {
       return false;
     }
-    if (currentPlayer.takenPositions.length > 2) {
+    if (playerPositions.length > 2) {
       for (var win in winningBoardSets) {
         var listToCheck = winningBoardSets[win];
-        var isMatch = this.findMatch(listToCheck);
+        var isMatch = this.findBoardMatch(listToCheck);
         if (isMatch) {
             currentPlayer.wins += 1;
             currentPlayer.saveWinsToStorage();
@@ -81,10 +92,10 @@ class Game {
     }
 
   updateTurn() {
-    if (this.currentTurnIndexPosition === 0) {
-      this.currentTurnIndexPosition = 1;
-    } else if (this.currentTurnIndexPosition === 1) {
-      this.currentTurnIndexPosition = 0;
+    if (this.currentPlayersTurnIndex === 0) {
+      this.currentPlayersTurnIndex = 1;
+    } else if (this.currentPlayersTurnIndex === 1) {
+      this.currentPlayersTurnIndex = 0;
     }
   }
 

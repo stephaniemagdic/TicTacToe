@@ -43,11 +43,12 @@ resetWinsButton.addEventListener("click", function() {
 });
 
 leftEmojiSelect.addEventListener("change", function(e) {
-  updatePlayer1(e);
+  updatePlayer1Token(e);
 });
+//  updatePlayer1(e, currentGame);
 
 rightEmojiSelect.addEventListener("change", function(e) {
-  updatePlayer2(e);
+  updatePlayer2Token(e);
 });
 
 //---------------------FUNCTIONS---------------------------------------------//
@@ -63,7 +64,6 @@ function createBoard() {
 function renderPage() {
   var token1 = currentGame.players[0].token;
   var token2 = currentGame.players[1].token;
-
   gameBoardSection.innerHTML = "";
   gameBoardSection.innerHTML += `
   <table class="table">
@@ -98,17 +98,18 @@ function renderPage() {
 
   leftAsideToken.innerText = `${token1}`;
   rightAsideToken.innerText = `${token2}`;
-  addTokens();
+  addTokens(token1, token2);
 }
 
-function updatePlayer1(e) {
+// function updatePlayer1(e, game)
+function updatePlayer1Token(e) {
   var emoji = e.target.value;
   currentGame.players[0].token = emoji;
   renderPage();
   updatePageText();
 }
 
-function updatePlayer2(e) {
+function updatePlayer2Token(e) {
   var emoji = e.target.value;
   currentGame.players[1].token = emoji;
   renderPage();
@@ -116,7 +117,7 @@ function updatePlayer2(e) {
 }
 
 function updatePageText(outcome) {
-  var token = currentGame.players[currentGame.currentTurnIndexPosition].token;
+  var token = currentGame.players[currentGame.currentPlayersTurnIndex].token;
   leftAsideText.innerHTML = `${currentGame.players[0].wins} wins`;
   rightAsideText.innerHTML = `${currentGame.players[1].wins} wins`;
   if (!outcome) {
@@ -130,14 +131,10 @@ function updatePageText(outcome) {
 
 function takeTurn(e) {
   var positionSelected = e.target.id;
-  var currentPlayerPositions = currentGame.players[currentGame.currentTurnIndexPosition].takenPositions;
-  currentPlayerPositions.push(positionSelected);
+  currentGame.addPlayerPosition(positionSelected);
   renderPage();
   currentGame.addTurn();
-//   if (currentPlayerPositions.length >= 3) {
-//   var outcome = currentGame.checkOutcome();
-//   showResult(outcome)
-// } else {switchTurns(false);}
+//check if three turns taken?
   var outcome = currentGame.checkOutcome();
   if (!outcome) {
     switchTurns(outcome);
@@ -172,16 +169,13 @@ function enableClick() {
   gameBoardSection.style.pointerEvents = "auto";
 }
 
-//can I refactor this?
-function addTokens() {
-  var token1 = currentGame.players[0].token;
-  var token2 = currentGame.players[1].token;
-  var boardSpots = document.querySelectorAll('td');
-  for (var i = 0; i < boardSpots.length; i ++) {
-    if (currentGame.players[0].takenPositions.includes(boardSpots[i].id)) {
-      boardSpots[i].innerText = `${token1}`;
-    } else if (currentGame.players[1].takenPositions.includes(boardSpots[i].id)) {
-      boardSpots[i].innerText = `${token2}`;
+function addTokens(player1Token, player2Token) {
+  var boardPositions = document.querySelectorAll('td');
+  for (var i = 0; i < boardPositions.length; i ++) {
+    if (currentGame.player1Positions.includes(boardPositions[i].id)) {
+      boardPositions[i].innerText = `${player1Token}`;
+    } else if (currentGame.player2Positions.includes(boardPositions[i].id)) {
+      boardPositions[i].innerText = `${player2Token}`;
     }
   }
 }
