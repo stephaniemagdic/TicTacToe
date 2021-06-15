@@ -1,7 +1,13 @@
 
 # Tic Tac Toe
 
-Tic Tac Toe brings the well-known pen-and-paper game to your device, so you can play tic tac toe with friends and family if there is no paper to reach for!
+Tic Tac Toe brings the well-known pen-and-paper game to your device, so you can play tic tac toe with friends and family if there is no paper to reach for! 
+ * Tokens can be dynamically added to the tic-tac-toe board and checked for a winning array match or a draw. 
+ * User data is updated on the page when the data model is modifed after a win, a draw, a player takes a turn, or a button is clicked.
+ * This application uses localStorage to persist player wins. 
+ * It has many reusable functions that use parameters that make the JavsaScript dynamic and clean.
+ * The game uses event delegation to handle events on a higher level in the DOM to listen for dynamic elements.
+ * The game can be played entirely in the console without the user interface, distinguishing the data model from the DOM and using the data model as it's source of truth as it updates the DOM. It also itterates through DOM elements to use our data model to update the page.
 
 
 
@@ -18,9 +24,9 @@ Tic Tac Toe brings the well-known pen-and-paper game to your device, so you can 
 
 ### Technologies Used 
 
-HTML
+HTML5
 CSS
-JavaScript 
+JavaScript (ECMAScript 2009)
 
 
 
@@ -73,7 +79,9 @@ Put GIFFY here.
 
 Put GIFFY here.
 
-* **Draw!:**  xxx
+* **Draw!:**  
+ * When all spaces are taken up with player tokens, it will be a draw - no winners!
+ * Your gameboard will be reset and a new game will be ready to play for a win! 
 
 Put GIFFY here.
 
@@ -85,5 +93,8 @@ Put GIFFY here.
 ## More GIPHY's here.
 
 ### Challenges 
+ 1. One challenge I faced was when I noticed Monday night that my game class was technically using a method to update a property in the player class. This violated the single responsibility principle. I am grateful I ran into this, as it helped me further grasp this concept of SRP. It reminded me that classes should only hold static information about the class or properties the class itself is updating. I also learned to keep this question in mind: `Does the class need to know about the information (in order to update use/manipulate it)?` If so, it might need to be a property on that class. Because of this I made sure methods were updating their class instances and then updated main to call those methods accordingly.
 ### Wins
+ 1. I planned out each step of the functionality and thought through all of the logic of this game before even touching any code. I spent about 3 days to really have a well-thought-out plan. This saved me from too much frustration or confusion.
+ 2. My game and player class are fully functional on their own. The Data model is held in the instance of the currentGame and is the only thing needed to run the app. The user interface uses the classes as its data model to update the DOM/what the user sees.
 
