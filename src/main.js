@@ -77,7 +77,7 @@ function renderPage() {
         </td>
       </tr>
       <tr class="row-two">
-        <td id="ML" class="open-position left-style">
+        <td id="ML" class="open-position left-style left-side-spot">
         </td>
         <td id="MC" class="open-position middle-style">
         </td>

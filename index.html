@@ -6,62 +6,60 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <aside class="left-side">
-      <section class="left">
-        <form class="choose-your-token">
-          <fieldset>
-            <legend>
-              Choose Your Token:
-            </legend>
-            <select name="emoji-token" class="select-left">
-              <option value="🧗" alt="Person climbing" selected>🧗‍</option>
-              <option value="🏂" alt="Snowboarder">🏂</option>
-              <option value="🏄" alt="Person surfing">🏄</option>
-              <option value="🏊‍♀️" alt="Person swimming">🏊‍♀️</option>
-              <option value="🧘" alt="Person in Lotus Position">🧘</option>
-              <option value="🏇" alt="Horse racing">🏇</option>
-              <option value="🏋️‍♀️" alt="Person lifting weights">🏋️‍♀️</option>
-            </select>
-          </fieldset>
-        </form>
-        <div class="player-1-token"><!--token--></div>
-        <h2 class="player1-wins"><!--will display number of wins--></h2>
-        <button class="add-win-player1">Add a win</button>
-        <button class="subtract-win-player1">Subtract a win</button>
-      </section>
+    <aside class="left-side player-data">
+      <form class="choose-your-token">
+        <fieldset>
+          <legend>
+            Choose Your Token:
+          </legend>
+          <select name="emoji-token" class="select-left">
+            <option value="🧗" alt="Person climbing" selected>🧗‍</option>
+            <option value="🏂" alt="Snowboarder">🏂</option>
+            <option value="🏄" alt="Person surfing">🏄</option>
+            <option value="🏊‍♀️" alt="Person swimming">🏊‍♀️</option>
+            <option value="🧘" alt="Person in Lotus Position">🧘</option>
+            <option value="🏇" alt="Horse racing">🏇</option>
+            <option value="🏋️‍♀️" alt="Person lifting weights">🏋️‍♀️</option>
+          </select>
+        </fieldset>
+      </form>
+      <div class="player-1-token token-display"><!--token--></div>
+      <h2 class="player1-wins win-count"><!--will display number of wins--></h2>
+      <button class="add-win-player1">Add a win</button>
+      <button class="subtract-win-player1">Subtract a win</button>
     </aside>
-    <main class="middle">
-      <h1 class="turn-tracker-winner-display"><!--will display turn tracker and round winner--></h1>
+    <main class="middle game-display">
+      <h1 class="turn-tracker-winner-display">
+        <!--will display turn tracker and round winner-->
+      </h1>
       <section class="game-board">
-      <!---Tic Tac Toe Board will go here --->
+        <!---Tic Tac Toe Board will go here --->
       </section>
       <div class="reset">
         <button class="reset-wins">Reset Wins</button>
       <div>
     </main>
-    <aside class="right-side">
-      <section class="right">
-        <form class="choose-your-token">
-         <fieldset>
-           <legend>
-             Choose Your Token:
-           </legend>
-           <select name="emoji-token" class="select-right">
-             <option value="🤺" alt="Person fencing" selected>🤺</option>
-             <option value="⛷️" alt="Skier">⛷️</option>
-             <option value="⛹️" alt="Person bouncing ball">⛹️</option>
-             <option value="🚵" alt="Person mountain biking">🚵</option>
-             <option value="🤸" alt="Person chartwheeling">🤸</option>
-             <option value="🏌️" alt="Person golfing">🏌️</option>
-             <option value="🤽‍♀️" alt="Person playing water polo">🤽‍♀️</option>
-           </select>
-           </fieldset>
-       </form>
-        <div class="player-2-token"><!--token--></div>
-        <h2 class="player2-wins"><!--will display number of wins--></h2>
-        <button class="add-win-player2">Add a win</button>
-        <button class="subtract-win-player2">Subtract a win</button>
-      </section>
+    <aside class="right-side player-data">
+      <form class="choose-your-token">
+        <fieldset>
+         <legend>
+           Choose Your Token:
+         </legend>
+         <select name="emoji-token" class="select-right">
+           <option value="🤺" alt="Person fencing" selected>🤺</option>
+           <option value="⛷️" alt="Skier">⛷️</option>
+           <option value="⛹️" alt="Person bouncing ball">⛹️</option>
+           <option value="🚵" alt="Person mountain biking">🚵</option>
+           <option value="🤸" alt="Person chartwheeling">🤸</option>
+           <option value="🏌️" alt="Person golfing">🏌️</option>
+           <option value="🤽‍♀️" alt="Person playing water polo">🤽‍♀️</option>
+         </select>
+         </fieldset>
+      </form>
+      <div class="player-2-token token-display"><!--token--></div>
+      <h2 class="player2-wins win-count"><!--will display number of wins--></h2>
+      <button class="add-win-player2">Add a win</button>
+      <button class="subtract-win-player2">Subtract a win</button>
     </aside>
     <script type="text/javascript" src="src/data.js"></script>
     <script type="text/javascript" src="src/player.js"></script>

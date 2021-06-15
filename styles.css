@@ -4,11 +4,8 @@ body {
   font-family: 'Quicksand', sans-serif;
 }
 
-/* //left and right aside might have a shared class name instead */
-.left,
-.right,
-.left-side,
-.right-side {
+/* ---------------------------------PLAYER DATA ASIDES------------------------------------ */
+.player-data {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,29 +35,25 @@ select {
   font-size: 25px;
 }
 
-/* //player tokens might have a shared class */
-.player-1-token,
-.player-2-token {
+.token-display {
   font-size: 30px;
   text-align: center;
   width: 100%;
   margin-top: 20px;
 }
 
-/* //player wins might have a shared class */
-.player1-wins,
-.player2-wins {
+.win-count {
   text-align: center;
   font-size: 30px;
 }
 
-.middle {
+/* ---------------------------------GAME BOARD DISPLAY MAIN------------------------------------ */
+.game-display {
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 100vh;
-  flex: 3;
-  background-color: white;
+  flex: 2.5;
 }
 
 h1 {
@@ -74,10 +67,8 @@ h1 {
   flex: 5;
 }
 
-.table {
+.game-board > .table {
   height: 100%;
-  width: 100%;
-  flex: 1;
   padding: 20px;
   background-color: white;
   border-spacing: 0;
@@ -86,7 +77,6 @@ h1 {
 .game-board tr {
   height: 65px;
 }
-
 
 .game-board td {
   width: 60px;
@@ -100,7 +90,7 @@ td > p {
   font-size: 55px;
 }
 
-/* //put shared class here */
+/* ---------------------------------GAME BOARD SPOTS------------------------------------ */
 .corner-left-style,
 .left-style {
   border-right: 2px solid black;
@@ -112,7 +102,6 @@ td > p {
   border-bottom: 2px solid black;
 }
 
-/* //create shared class here */
 .corner-right-style,
 .right-style {
   border-left: 2px solid black;
@@ -127,11 +116,12 @@ td > p {
   border-left: 2px solid black;
 }
 
+/* ----------------------------------------BUTTONS---------------------------------------- */
 button {
   font-family: 'Quicksand', sans-serif;
   font-size: 15px;
   text-align: center;
-  width: 80px;
+  width: 110px;
   border-radius:10px;
   border: none;
   margin: 6px;
@@ -142,9 +132,9 @@ button {
 
 .reset {
   display: flex;
-  display: column;
   justify-content: center;
 }
+/* ----------------------------------------------------------------------------------------- */
 
 .disabled {
   cursor: not-allowed;
