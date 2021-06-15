@@ -10,8 +10,8 @@ var player1WinSubtractButton = document.querySelector(".subtract-win-player1");
 var player2WinSubtractButton = document.querySelector(".subtract-win-player2");
 var player1WinAddButton = document.querySelector(".add-win-player1");
 var player2WinAddButton = document.querySelector(".add-win-player2");
-var leftEmojiSelect = document.querySelector(".selectLeft");
-var rightEmojiSelect = document.querySelector(".selectRight");
+var leftEmojiSelect = document.querySelector(".select-left");
+var rightEmojiSelect = document.querySelector(".select-right");
 var currentGame;
 
 //---------------------EVENT LISTENERS---------------------------------------//
@@ -173,9 +173,11 @@ function addTokens(player1Token, player2Token) {
   var boardPositions = document.querySelectorAll('td');
   for (var i = 0; i < boardPositions.length; i ++) {
     if (currentGame.player1Positions.includes(boardPositions[i].id)) {
-      boardPositions[i].innerText = `${player1Token}`;
+      boardPositions[i].innerHTML = `<p role="img" aria-label="player1-token">${player1Token}</p>`
+      // boardPositions[i].innerText = `${player1Token}`;
     } else if (currentGame.player2Positions.includes(boardPositions[i].id)) {
-      boardPositions[i].innerText = `${player2Token}`;
+      boardPositions[i].innerHTML = `<p role="img" aria-label="player2-token">${player2Token}</p>`
+      // boardPositions[i].innerText = `${player2Token}`;
     }
   }
 }
