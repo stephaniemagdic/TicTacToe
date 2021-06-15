@@ -23,9 +23,9 @@ Tic Tac Toe brings the well-known pen-and-paper game to your device, so you can 
 
 ### Technologies Used 
 
-HTML5
-CSS
-JavaScript (ECMAScript 2009)
+* HTML5
+* CSS
+* JavaScript (ECMAScript 2009)
 
 
 
