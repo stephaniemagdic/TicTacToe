@@ -55,10 +55,8 @@ rightEmojiSelect.addEventListener("change", function(e) {
 //---------------------FUNCTIONS---------------------------------------------//
 function createBoard() {
   currentGame = new Game();
-  // var player1DefaultToken = leftEmojiSelect.selectedOptions[0].value;
   var player1DefaultToken = `🧗`;
   var player2DefaultToken = `🤺`;
-  // var player2DefaultToken = leftEmojiSelect.selectedOptions[1].value;
   currentGame.setUp(player1DefaultToken, player2DefaultToken);
   checkLocalStorage();
   updatePage();
@@ -135,25 +133,11 @@ function updatePage() {
   updatePageText();
 }
 
-
-function updatePlayer1Token(e) {
-  var emoji = e.target.value;
-  currentGame.players[0].token = emoji;
-  updatePage();
-}
-
-function updatePlayer2Token(e) {
-  var emoji = e.target.value;
-  currentGame.players[1].token = emoji;
-  updatePage();
-}
-
 function takeTurn(e) {
   var positionSelected = e.target.id;
   currentGame.addPlayerPosition(positionSelected);
   renderPage();
   currentGame.addTurn();
-//check if three turns taken?
   var outcome = currentGame.checkOutcome();
   if (outcome === "win") {
     var playerIndex = currentGame.currentPlayersTurnIndex;
@@ -217,5 +201,17 @@ function clearWins() {
     currentGame.players[i].resetWins();
     currentGame.players[i].saveWinsToStorage();
   }
+  updatePage();
+}
+
+function updatePlayer1Token(e) {
+  var emoji = e.target.value;
+  currentGame.players[0].token = emoji;
+  updatePage();
+}
+
+function updatePlayer2Token(e) {
+  var emoji = e.target.value;
+  currentGame.players[1].token = emoji;
   updatePage();
 }
