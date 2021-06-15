@@ -10,8 +10,8 @@ var player1WinSubtractButton = document.querySelector(".subtract-win-player1");
 var player2WinSubtractButton = document.querySelector(".subtract-win-player2");
 var player1WinAddButton = document.querySelector(".add-win-player1");
 var player2WinAddButton = document.querySelector(".add-win-player2");
-var leftEmojiSelect = document.querySelector("#selectLeft");
-var rightEmojiSelect = document.querySelector("#selectRight");
+var leftEmojiSelect = document.querySelector(".selectLeft");
+var rightEmojiSelect = document.querySelector(".selectRight");
 var currentGame;
 
 //---------------------EVENT LISTENERS---------------------------------------//
@@ -52,8 +52,10 @@ rightEmojiSelect.addEventListener("change", function(e) {
 //---------------------FUNCTIONS---------------------------------------------//
 function createBoard() {
   currentGame = new Game();
+  // var player1DefaultToken = leftEmojiSelect.selectedOptions[0].value;
   var player1DefaultToken = `🧗`;
   var player2DefaultToken = `🤺`;
+  // var player2DefaultToken = leftEmojiSelect.selectedOptions[1].value;
   currentGame.setUp(player1DefaultToken, player2DefaultToken);
   renderPage();
   updatePageText();
