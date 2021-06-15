@@ -51,7 +51,7 @@ select {
 .game-display {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
   height: 100vh;
   flex: 2.5;
 }
@@ -65,6 +65,7 @@ h1 {
   display: flex;
   flex-direction: column;
   flex: 5;
+  align-self: stretch;
 }
 
 .game-board > .table {
@@ -128,11 +129,6 @@ button {
   padding: 6px;
   background-color: #8DEEEE;
   color: black;
-}
-
-.reset {
-  display: flex;
-  justify-content: center;
 }
 /* ----------------------------------------------------------------------------------------- */
 
