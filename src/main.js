@@ -78,27 +78,27 @@ function renderPage() {
   <table class="table">
     <tbody>
       <tr class="row-one">
-        <td id="TL" class="open-position corner-left-style">
+        <td class="open-position corner-left-style" id="TL">
         </td>
-        <td id="TC" class="open-position top-style">
+        <td class="open-position top-style" id="TC">
         </td>
-        <td id="TR" class="open-position corner-right-style">
+        <td class="open-position corner-right-style" id="TR">
         </td>
       </tr>
       <tr class="row-two">
-        <td id="ML" class="open-position left-style left-side-spot">
+        <td class="open-position left-style left-side-spot" id="ML">
         </td>
-        <td id="MC" class="open-position middle-style">
+        <td class="open-position middle-style" id="MC">
         </td>
-        <td id="MR" class="open-position right-style">
+        <td class="open-position right-style" id="MR">
         </td>
       </tr>
       <tr class="row-three">
-        <td id="BL" class="open-position corner-bottom-left-style">
+        <td class="open-position corner-bottom-left-style" id="BL">
         </td>
-        <td id="BC" class="open-position bottom-style">
+        <td class="open-position bottom-style" id="BC">
         </td>
-        <td id="BR" class="open-position corner-bottom-right-style">
+        <td class="open-position corner-bottom-right-style" id="BR">
         </td>
       </tr>
     </tbody>
