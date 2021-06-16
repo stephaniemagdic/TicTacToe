@@ -39,7 +39,8 @@ Virtual Tic-Tac-Toe brings the well-known pen-and-paper game to your device, so 
   * player.js file: 
     * holds all information about the player, including the player's id, token, and wins
     * holds methods to change a player's token and to update, reset, and save wins to local storage
-  * main.js file: handles all of the logic to use our classes/data model to manipulate the DOM
+  * main.js file: 
+    * handles all of the logic to use our classes/data model to manipulate the DOM
 * index.html
 * styles.css
 * README.md
