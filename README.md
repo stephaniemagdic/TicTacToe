@@ -44,7 +44,7 @@ You can access the game by `cloning this repository` and opening the `index.html
   * Use the `Add a win buttons` to add a win to the player's total wins. 
   * You might have taken another player's turn or your opponent maybe refreshed the page in frustration. No Worries. Use this button to add a win to your total win count at any time.
 
-![Add a win gif](https://i.ibb.co/6ZNgXS4/add-a-win.gif)
+![Add a win gif](https://i.ibb.co/2grbSFb/add-subract-and-reset-wins.gif)
 
 * **Subtract a win:** 
   * Use the `Subtract a win buttons` to subtract a win from the player's total wins.
@@ -82,7 +82,7 @@ You can access the game by `cloning this repository` and opening the `index.html
   * When all spaces are taken up with player tokens, it will be a draw - no winners!
   * Your gameboard will be reset and a new game will be ready to play for a win! 
 
-![Subtract a win gif](https://i.ibb.co/rvF4fCD/win-and-draw.gif)
+![Win or Draw Gif](https://i.ibb.co/rvF4fCD/win-and-draw.gif)
 
 
 ### Project Challenges 
