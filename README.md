@@ -44,20 +44,18 @@ You can access the game by `cloning this repository` and opening the `index.html
   * Use the `Add a win buttons` to add a win to the player's total wins. 
   * You might have taken another player's turn or your opponent maybe refreshed the page in frustration. No Worries. Use this button to add a win to your total win count at any time.
 
-![Add a win gif](https://i.ibb.co/2grbSFb/add-subract-and-reset-wins.gif)
 
 * **Subtract a win:** 
   * Use the `Subtract a win buttons` to subtract a win from the player's total wins.
   * If there was an error made and someone placed a token out of turn on the last move - don't sweat! Use this button to subtract a win from your total wins at any time.
 
-![Subtract a win gif](https://i.ibb.co/CJZdLx9/subtract-a-win.gif)
 
 * **Reset all wins:**  
   * Use the `Reset Wins button` to reset both players wins and start fresh.
   * You might find yourself coming back to the game on your next roadtrip to find that the data from the previous session's games are stored. Simply use the reset wins button to clear all wins rather than finagling with the add and subtract win buttons. 
-  
-  
-    ![Reset Wins Image](https://i.ibb.co/QctJ5fh/reset-wins.png)
+ 
+ 
+![Add a win gif](https://i.ibb.co/2grbSFb/add-subract-and-reset-wins.gif)
   
 
 * **Place a token:**  
