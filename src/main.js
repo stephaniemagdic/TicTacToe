@@ -115,7 +115,7 @@ function renderPage() {
   addTokens(token1, token2);
 }
 
-function updatePageText(outcome) {
+function renderText(outcome) {
   var token = currentGame.players[currentGame.currentPlayersTurnIndex].token;
   leftAsideText.innerHTML = `${currentGame.players[0].wins} wins`;
   rightAsideText.innerHTML = `${currentGame.players[1].wins} wins`;
@@ -134,7 +134,7 @@ function updatePageText(outcome) {
 
 function updatePage() {
   renderPage();
-  updatePageText();
+  renderText();
 }
 
 function takeTurn(e) {
@@ -156,7 +156,7 @@ function takeTurn(e) {
 
 function switchTurns(outcome) {
   currentGame.updateTurn();
-  updatePageText();
+  renderText();
   renderPage();
   if (outcome) {
     enableClick();
@@ -164,7 +164,7 @@ function switchTurns(outcome) {
 }
 
 function showResult(outcome) {
-    updatePageText(outcome);
+    renderText(outcome);
     currentGame.reset();
     preventClick();
     setTimeout(function() {
