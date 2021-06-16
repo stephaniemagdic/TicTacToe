@@ -209,13 +209,13 @@ function clearWins() {
 }
 
 function updatePlayer1Token(e) {
-  var emoji = e.target.value;
-  currentGame.players[0].token = emoji;
+  var chosenToken = e.target.value;
+  currentGame.players[0].changeToken(chosenToken);
   updatePage();
 }
 
 function updatePlayer2Token(e) {
-  var emoji = e.target.value;
-  currentGame.players[1].token = emoji;
+  var chosenToken = e.target.value;
+  currentGame.players[1].changeToken(chosenToken);
   updatePage();
 }
