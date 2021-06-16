@@ -60,10 +60,6 @@ You can access the game by `cloning this repository` and opening the `index.html
 
 * **Place a token:**  
   * Pay attention to the `h1` page text that lists whose turn it is. 
-  
-  
-  ![Player Turn Display](https://i.ibb.co/4d0Pd8f/Screen-Shot-2021-06-15-at-11-18-25-AM.png)
-  
   * When it is your turn, `click` an open tic-tac-toe spot to place your token. 
   * Be aware - you may not steal your opponent's spot. Once placed, their token is immovable. 
   * To continue the game, choose an available spot and see your token appear.
@@ -72,9 +68,6 @@ You can access the game by `cloning this repository` and opening the `index.html
   * To win a game be the first player to place 3 tokens in a row either diagonally, vertically or horizontally!
   * When you win a game, your wins will be updated and you wil be notified of your win at the top of the page! 
   
-  
-  ![Player Win Notification](https://i.ibb.co/xq0Fvpg/win-notification.png)
-
 
 * **Draw:**  
   * When all spaces are taken up with player tokens, it will be a draw - no winners!
