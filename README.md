@@ -82,7 +82,7 @@ You can access the game by `cloning this repository` and opening the `index.html
   * When all spaces are taken up with player tokens, it will be a draw - no winners!
   * Your gameboard will be reset and a new game will be ready to play for a win! 
 
-![Subtract a win gif]()
+![Subtract a win gif](https://i.ibb.co/rvF4fCD/win-and-draw.gif)
 
 
 ### Project Challenges 
