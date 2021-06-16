@@ -29,4 +29,8 @@ class Player {
     this.wins = 0;
   }
 
+  changeToken(token) {
+    this.token = token;
+  }
+
 }
