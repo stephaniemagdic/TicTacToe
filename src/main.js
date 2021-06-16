@@ -105,8 +105,13 @@ function renderPage() {
   </table>
   `;
 
-  leftAsideToken.innerText = `${token1}`;
-  rightAsideToken.innerText = `${token2}`;
+  leftAsideToken.innerHTML = `
+    <p role="img" aria-label="player1-token">${token1}</p>
+  `;
+  rightAsideToken.innerHTML = `
+    <p role="img" aria-label="player1-token">${token2}</p>
+  `;
+
   addTokens(token1, token2);
 }
 
