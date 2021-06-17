@@ -15,7 +15,7 @@ var rightEmojiSelect = document.querySelector("#selectRight");
 var currentGame;
 
 //---------------------EVENT LISTENERS---------------------------------------//
-window.addEventListener("load", createBoard);
+window.addEventListener("load", createGame);
 gameBoardSection.addEventListener("click", function(e) {
   if (e.target.classList.contains("open-position") && !e.target.innerText) {
     takeTurn(e);
@@ -53,7 +53,7 @@ rightEmojiSelect.addEventListener("change", function(e) {
 });
 
 //---------------------FUNCTIONS---------------------------------------------//
-function createBoard() {
+function createGame() {
   currentGame = new Game();
   var player1DefaultToken = `🧗`;
   var player2DefaultToken = `🤺`;
@@ -150,7 +150,7 @@ function takeTurn(e) {
   if (!outcome) {
     switchTurns(outcome);
   } else {
-    showResult(outcome);
+    executeOutcomeConditions(outcome);
   }
 }
 
@@ -163,16 +163,16 @@ function switchTurns(outcome) {
   }
 }
 
-function showResult(outcome) {
+function executeOutcomeConditions(outcome) {
     renderText(outcome);
     currentGame.reset();
-    preventClick();
+    disableClick();
     setTimeout(function() {
       switchTurns(outcome)
     }, 2000);
 }
 
-function preventClick() {
+function disableClick() {
   gameBoardSection.style.pointerEvents = "none";
 }
 
