@@ -43,9 +43,9 @@ player2WinAddButton.addEventListener("click", function() {
 });
 
 //should I just call my method here rather than create a whole new function?
-//make into one function?
 resetWinsButton.addEventListener("click", function() {
-  updateWins(0, "both")
+  updateWins(0, "both");
+  renderText();
 });
 
 //updatePlayer1Token(e, player2)
@@ -60,12 +60,8 @@ rightEmojiSelect.addEventListener("change", function(e) {
 //---------------------FUNCTIONS---------------------------------------------//
 function createGame() {
   currentGame = new Game();
-  // var player1DefaultToken = `🧗`;
-  // var player2DefaultToken = `🤺`;
-  // currentGame.setUp(player1DefaultToken, player2DefaultToken);
-  currentGame.setUp(player1DefaultToken, player2DefaultToken);
+  currentGame.setUp();
   getWinsFromStorage();
-  // renderPageAndText();
   updatePage();
 }
 
@@ -208,13 +204,12 @@ function updateWins(amt, playerIndex) {
   currentGame.players[playerIndex].adjustWins(amt);
   currentGame.players[playerIndex].saveWinsToStorage();
   } else if (amt === 0) {
-    for (var i = 0; i < this.currentGame.players.length; i ++) {
-      currentGame.players[playerIndex].adjustWins(amt);
-      currentGame.players[playerIndex].saveWinsToStorage();
+    for (var i = 0; i < currentGame.players.length; i ++) {
+      currentGame.players[i].adjustWins(amt);
+      currentGame.players[i].saveWinsToStorage();
     }
   }
 }
-
 
 function updatePlayerToken(e, player) {
   var chosenToken = e.target.value;

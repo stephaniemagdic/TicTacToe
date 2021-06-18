@@ -20,10 +20,10 @@ class Player {
   }
 
   adjustWins(amt) {
-    if (this.wins > 0 || amt > 0) {
+    if (amt === 0) {
+        this.wins = 0;
+    } else if (this.wins > 0 || amt > 0) {
       this.wins += amt;
-    } else if (amt = 0) {
-      this.wins = 0;
     }
   }
 
