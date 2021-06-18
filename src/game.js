@@ -5,6 +5,7 @@ class Game {
     this.totalTurnsTaken = 0;
     this.player1Positions = [];
     this.player2Positions = [];
+    //this.currentMove = "TM"; 
   }
 
   addPlayer(player) {
@@ -56,6 +57,17 @@ class Game {
   }
 
   checkOutcome() {
+    var winningBoardSets = {
+      win1: ["TL", "TC", "TR"],
+      win2: ["ML", "MC", "MR"],
+      win3: ["BL", "BC", "BR"],
+      win4: ["TL", "ML", "BL"],
+      win5: ["TC", "MC", "BC"],
+      win6: ["TR", "MR", "BR"],
+      win7: ["TL", "MC", "BR"],
+      win8: ["TR", "MC", "BL"]
+    }
+
     var player = this.players[this.currentPlayersTurnIndex];
     if (this.currentPlayersTurnIndex === 0) {
       var playerPositions = this.player1Positions;

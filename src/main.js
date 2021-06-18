@@ -1,4 +1,5 @@
 //---------------------GLOBAL VARIABLES--------------------------------------//
+//put this in get element by id.
 var leftAsideText = document.querySelector("#player1Wins");
 var rightAsideText = document.querySelector("#player2Wins");
 var leftAsideToken = document.querySelector("#player1Token");
@@ -184,7 +185,8 @@ function disableClick() {
 function enableClick() {
   gameBoardSection.style.pointerEvents = "auto";
 }
-
+//event.target.id = currentMove;
+//call only on reset
 function addTokens(player1Token, player2Token) {
   var boardPositions = document.querySelectorAll('td');
   for (var i = 0; i < boardPositions.length; i ++) {
@@ -199,7 +201,7 @@ function addTokens(player1Token, player2Token) {
     }
   }
 }
-
+//resetWins()
 function updateWins(amt, playerIndex) {
   if (amt === -1 || amt === 1) {
   currentGame.players[playerIndex].adjustWins(amt);
