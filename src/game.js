@@ -11,10 +11,12 @@ class Game {
     this.players.push(player);
   }
 
-  setUp(player1Token, player2Token) {
-    this.players = [];
-    var player1 = new Player(1, player1Token, 0);
-    var player2 = new Player(2, player2Token, 0);
+  // setUp(player1Token, player2Token) {
+  setUp() {
+    var player1DefaultToken = `🧗`;
+    var player2DefaultToken = `🤺`;
+    var player1 = new Player(1, player1DefaultToken , 0);
+    var player2 = new Player(2, player2DefaultToken, 0);
     this.addPlayer(player1);
     this.addPlayer(player2);
     this.currentPlayersTurnIndex = 0;
@@ -40,7 +42,10 @@ class Game {
 
   findBoardMatch(currentWinList) {
     var count = 0;
+    //could get rid of isMatch and just return true or false
+    //explicit in function name
     var isMatch = false;
+    //get rid of this and just use a paramter.
     if (this.currentPlayersTurnIndex === 0) {
       var playerPositions = this.player1Positions;
     } else if (this.currentPlayersTurnIndex === 1) {
@@ -72,6 +77,7 @@ class Game {
     if (playerPositions.length > 2) {
       for (var win in winningBoardSets) {
         var listToCheck = winningBoardSets[win];
+        //include a parameter which is what is the player
         var isMatch = this.findBoardMatch(listToCheck);
         if (isMatch) {
           return "win";
@@ -84,6 +90,8 @@ class Game {
     }
   }
 
+  //pass param... in main or in class?
+  //toggle turn
   updateTurn() {
     if (this.currentPlayersTurnIndex === 0) {
       this.currentPlayersTurnIndex = 1;

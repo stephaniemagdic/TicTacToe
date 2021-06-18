@@ -22,11 +22,9 @@ class Player {
   adjustWins(amt) {
     if (this.wins > 0 || amt > 0) {
       this.wins += amt;
+    } else if (amt = 0) {
+      this.wins = 0;
     }
-  }
-
-  resetWins() {
-    this.wins = 0;
   }
 
   changeToken(token) {

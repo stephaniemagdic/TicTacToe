@@ -24,26 +24,31 @@ gameBoardSection.addEventListener("click", function(e) {
 
 player1WinSubtractButton.addEventListener("click", function() {
   updateWins(-1, 0);
-  updatePage();
+  renderText();
 });
 
 player2WinSubtractButton.addEventListener("click", function() {
   updateWins(-1, 1);
-  updatePage();
+  renderText();
 });
 
 player1WinAddButton.addEventListener("click", function() {
   updateWins(1, 0);
-  updatePage();
+  renderText();
 });
 
 player2WinAddButton.addEventListener("click", function() {
   updateWins(1, 1);
-  updatePage();
+  renderText();
 });
 
-resetWinsButton.addEventListener("click", clearWins);
+//should I just call my method here rather than create a whole new function?
+//make into one function?
+resetWinsButton.addEventListener("click", function() {
+  updateWins(0, "both")
+});
 
+//updatePlayer1Token(e, player2)
 leftEmojiSelect.addEventListener("change", function(e) {
   updatePlayer1Token(e);
 });
@@ -55,14 +60,18 @@ rightEmojiSelect.addEventListener("change", function(e) {
 //---------------------FUNCTIONS---------------------------------------------//
 function createGame() {
   currentGame = new Game();
-  var player1DefaultToken = `🧗`;
-  var player2DefaultToken = `🤺`;
+  // var player1DefaultToken = `🧗`;
+  // var player2DefaultToken = `🤺`;
+  // currentGame.setUp(player1DefaultToken, player2DefaultToken);
   currentGame.setUp(player1DefaultToken, player2DefaultToken);
-  checkLocalStorage();
+  getWinsFromStorage();
+  // renderPageAndText();
   updatePage();
 }
 
-function checkLocalStorage(){
+//better name? getWinsFromStorage();
+// function checkLocalStorage(){
+function getWinsFromStorage(){
   if (localStorage.length) {
     for (var i = 0; i < currentGame.players.length; i++){
       currentGame.players[i].retrieveWinsFromStorage();
@@ -115,6 +124,7 @@ function renderPage() {
   addTokens(token1, token2);
 }
 
+//name updateTrackerDisplay()
 function renderText(outcome) {
   var token = currentGame.players[currentGame.currentPlayersTurnIndex].token;
   leftAsideText.innerHTML = `${currentGame.players[0].wins} wins`;
@@ -132,11 +142,13 @@ function renderText(outcome) {
   }
 }
 
+//betterName?
 function updatePage() {
   renderPage();
   renderText();
 }
 
+//handleTurn
 function takeTurn(e) {
   var positionSelected = e.target.id;
   currentGame.addPlayerPosition(positionSelected);
@@ -156,8 +168,7 @@ function takeTurn(e) {
 
 function switchTurns(outcome) {
   currentGame.updateTurn();
-  renderText();
-  renderPage();
+  updatePage()
   if (outcome) {
     enableClick();
   }
@@ -196,17 +207,17 @@ function addTokens(player1Token, player2Token) {
 }
 
 function updateWins(amt, playerIndex) {
+  if (amt === -1 || amt === 1) {
   currentGame.players[playerIndex].adjustWins(amt);
   currentGame.players[playerIndex].saveWinsToStorage();
+  } else if (amt === 0) {
+    for (var i = 0; i < this.currentGame.players.length; i ++) {
+      currentGame.players[playerIndex].adjustWins(amt);
+      currentGame.players[playerIndex].saveWinsToStorage();
+    }
+  }
 }
 
-function clearWins() {
-  for (var i = 0; i < currentGame.players.length; i++) {
-    currentGame.players[i].resetWins();
-    currentGame.players[i].saveWinsToStorage();
-  }
-  updatePage();
-}
 
 function updatePlayer1Token(e) {
   var chosenToken = e.target.value;
