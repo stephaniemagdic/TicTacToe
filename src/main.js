@@ -65,6 +65,7 @@ function createGame() {
   updatePage();
 }
 
+//local storage here versus in game.js
 function getWinsFromStorage(){
   if (localStorage.length) {
     for (var i = 0; i < currentGame.players.length; i++){
@@ -160,7 +161,7 @@ function handleTurn(e) {
 }
 
 function switchTurns(outcome) {
-  currentGame.updateTurn();
+  currentGame.toggleTurn();
   updatePage()
   if (outcome) {
     enableClick();
