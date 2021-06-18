@@ -18,7 +18,7 @@ var currentGame;
 window.addEventListener("load", createGame);
 gameBoardSection.addEventListener("click", function(e) {
   if (e.target.classList.contains("open-position") && !e.target.innerText) {
-    takeTurn(e);
+    handleTurn(e);
   }
 });
 
@@ -50,11 +50,11 @@ resetWinsButton.addEventListener("click", function() {
 
 //updatePlayer1Token(e, player2)
 leftEmojiSelect.addEventListener("change", function(e) {
-  updatePlayer1Token(e);
+  updatePlayerToken(e, "player1");
 });
 
 rightEmojiSelect.addEventListener("change", function(e) {
-  updatePlayer2Token(e);
+  updatePlayerToken(e, "player2");
 });
 
 //---------------------FUNCTIONS---------------------------------------------//
@@ -69,8 +69,6 @@ function createGame() {
   updatePage();
 }
 
-//better name? getWinsFromStorage();
-// function checkLocalStorage(){
 function getWinsFromStorage(){
   if (localStorage.length) {
     for (var i = 0; i < currentGame.players.length; i++){
@@ -124,7 +122,7 @@ function renderPage() {
   addTokens(token1, token2);
 }
 
-//name updateTrackerDisplay()
+//better name? updateTrackerDisplay()
 function renderText(outcome) {
   var token = currentGame.players[currentGame.currentPlayersTurnIndex].token;
   leftAsideText.innerHTML = `${currentGame.players[0].wins} wins`;
@@ -148,8 +146,7 @@ function updatePage() {
   renderText();
 }
 
-//handleTurn
-function takeTurn(e) {
+function handleTurn(e) {
   var positionSelected = e.target.id;
   currentGame.addPlayerPosition(positionSelected);
   renderPage();
@@ -219,14 +216,13 @@ function updateWins(amt, playerIndex) {
 }
 
 
-function updatePlayer1Token(e) {
+function updatePlayerToken(e, player) {
   var chosenToken = e.target.value;
-  currentGame.players[0].changeToken(chosenToken);
-  updatePage();
-}
-
-function updatePlayer2Token(e) {
-  var chosenToken = e.target.value;
-  currentGame.players[1].changeToken(chosenToken);
+  if (player === "player1") {
+    currentGame.players[0].changeToken(chosenToken);
+  }
+  else if (player === "player2") {
+    currentGame.players[1].changeToken(chosenToken);
+  }
   updatePage();
 }
