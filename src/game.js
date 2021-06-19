@@ -11,10 +11,11 @@ class Game {
     this.players.push(player);
   }
 
-  setUp(player1Token, player2Token) {
-    this.players = [];
-    var player1 = new Player(1, player1Token, 0);
-    var player2 = new Player(2, player2Token, 0);
+  setUp() {
+    var player1DefaultToken = `🧗`;
+    var player2DefaultToken = `🤺`;
+    var player1 = new Player(1, player1DefaultToken , 0);
+    var player2 = new Player(2, player2DefaultToken, 0);
     this.addPlayer(player1);
     this.addPlayer(player2);
     this.currentPlayersTurnIndex = 0;
@@ -38,14 +39,9 @@ class Game {
     this.totalTurnsTaken += 1;
   }
 
-  findBoardMatch(currentWinList) {
+  findBoardMatch(currentWinList, playerPositions) {
     var count = 0;
     var isMatch = false;
-    if (this.currentPlayersTurnIndex === 0) {
-      var playerPositions = this.player1Positions;
-    } else if (this.currentPlayersTurnIndex === 1) {
-      var playerPositions = this.player2Positions;
-    }
     for (var i = 0; i < playerPositions.length; i ++) {
       var position = playerPositions[i];
       var match = currentWinList.includes(position);
@@ -59,7 +55,18 @@ class Game {
     return isMatch;
   }
 
-  checkOutcome() {
+  checkForWinOrDraw() {
+    var winningBoardSets = {
+      win1: ["TL", "TC", "TR"],
+      win2: ["ML", "MC", "MR"],
+      win3: ["BL", "BC", "BR"],
+      win4: ["TL", "ML", "BL"],
+      win5: ["TC", "MC", "BC"],
+      win6: ["TR", "MR", "BR"],
+      win7: ["TL", "MC", "BR"],
+      win8: ["TR", "MC", "BL"]
+    }
+
     var player = this.players[this.currentPlayersTurnIndex];
     if (this.currentPlayersTurnIndex === 0) {
       var playerPositions = this.player1Positions;
@@ -72,7 +79,7 @@ class Game {
     if (playerPositions.length > 2) {
       for (var win in winningBoardSets) {
         var listToCheck = winningBoardSets[win];
-        var isMatch = this.findBoardMatch(listToCheck);
+        var isMatch = this.findBoardMatch(listToCheck, playerPositions);
         if (isMatch) {
           return "win";
         }
@@ -84,7 +91,7 @@ class Game {
     }
   }
 
-  updateTurn() {
+  toggleTurn() {
     if (this.currentPlayersTurnIndex === 0) {
       this.currentPlayersTurnIndex = 1;
     } else if (this.currentPlayersTurnIndex === 1) {

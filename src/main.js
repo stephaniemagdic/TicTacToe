@@ -1,68 +1,69 @@
 //---------------------GLOBAL VARIABLES--------------------------------------//
-var leftAsideText = document.querySelector("#player1Wins");
-var rightAsideText = document.querySelector("#player2Wins");
-var leftAsideToken = document.querySelector("#player1Token");
-var rightAsideToken = document.querySelector("#player2Token");
-var trackerDisplay = document.querySelector("#turnTrackerWinnerDisplay");
-var gameBoardSection = document.querySelector("#gameBoardSection");
-var resetWinsButton = document.querySelector("#reset");
-var player1WinSubtractButton = document.querySelector("#subtractWinPlayer1");
-var player2WinSubtractButton = document.querySelector("#subtractWinPlayer2");
-var player1WinAddButton = document.querySelector("#addWinPlayer1");
-var player2WinAddButton = document.querySelector("#addWinPlayer2");
-var leftEmojiSelect = document.querySelector("#selectLeft");
-var rightEmojiSelect = document.querySelector("#selectRight");
+var leftAsideText = document.getElementById("player1Wins");
+var rightAsideText = document.getElementById("player2Wins");
+var leftAsideToken = document.getElementById("player1Token");
+var rightAsideToken = document.getElementById("player2Token");
+var trackerDisplay = document.getElementById("turnTrackerWinnerDisplay");
+var gameBoardSection = document.getElementById("gameBoardSection");
+var resetWinsButton = document.getElementById("reset");
+var player1WinSubtractButton = document.getElementById("subtractWinPlayer1");
+var player2WinSubtractButton = document.getElementById("subtractWinPlayer2");
+var player1WinAddButton = document.getElementById("addWinPlayer1");
+var player2WinAddButton = document.getElementById("addWinPlayer2");
+var leftEmojiSelect = document.getElementById("selectLeft");
+var rightEmojiSelect = document.getElementById("selectRight");
 var currentGame;
 
 //---------------------EVENT LISTENERS---------------------------------------//
 window.addEventListener("load", createGame);
 gameBoardSection.addEventListener("click", function(e) {
   if (e.target.classList.contains("open-position") && !e.target.innerText) {
-    takeTurn(e);
+    handleTurn(e);
   }
 });
 
 player1WinSubtractButton.addEventListener("click", function() {
   updateWins(-1, 0);
-  updatePage();
+  renderText();
 });
 
 player2WinSubtractButton.addEventListener("click", function() {
   updateWins(-1, 1);
-  updatePage();
+  renderText();
 });
 
 player1WinAddButton.addEventListener("click", function() {
   updateWins(1, 0);
-  updatePage();
+  renderText();
 });
 
 player2WinAddButton.addEventListener("click", function() {
   updateWins(1, 1);
-  updatePage();
+  renderText();
 });
 
-resetWinsButton.addEventListener("click", clearWins);
+resetWinsButton.addEventListener("click", function() {
+  updateWins(0, "both");
+  renderText();
+});
 
 leftEmojiSelect.addEventListener("change", function(e) {
-  updatePlayer1Token(e);
+  updatePlayerToken(e, "player1");
 });
 
 rightEmojiSelect.addEventListener("change", function(e) {
-  updatePlayer2Token(e);
+  updatePlayerToken(e, "player2");
 });
 
 //---------------------FUNCTIONS---------------------------------------------//
 function createGame() {
   currentGame = new Game();
-  var player1DefaultToken = `🧗`;
-  var player2DefaultToken = `🤺`;
-  currentGame.setUp(player1DefaultToken, player2DefaultToken);
-  checkLocalStorage();
+  currentGame.setUp();
+  getWinsFromStorage();
   updatePage();
 }
 
-function checkLocalStorage(){
+function getWinsFromStorage(){
   if (localStorage.length) {
     for (var i = 0; i < currentGame.players.length; i++){
       currentGame.players[i].retrieveWinsFromStorage();
@@ -137,12 +138,12 @@ function updatePage() {
   renderText();
 }
 
-function takeTurn(e) {
+function handleTurn(e) {
   var positionSelected = e.target.id;
   currentGame.addPlayerPosition(positionSelected);
   renderPage();
   currentGame.addTurn();
-  var outcome = currentGame.checkOutcome();
+  var outcome = currentGame.checkForWinOrDraw();
   if (outcome === "win") {
     var playerIndex = currentGame.currentPlayersTurnIndex;
     updateWins(1, playerIndex);
@@ -155,9 +156,8 @@ function takeTurn(e) {
 }
 
 function switchTurns(outcome) {
-  currentGame.updateTurn();
-  renderText();
-  renderPage();
+  currentGame.toggleTurn();
+  updatePage()
   if (outcome) {
     enableClick();
   }
@@ -196,26 +196,24 @@ function addTokens(player1Token, player2Token) {
 }
 
 function updateWins(amt, playerIndex) {
+  if (amt === -1 || amt === 1) {
   currentGame.players[playerIndex].adjustWins(amt);
   currentGame.players[playerIndex].saveWinsToStorage();
-}
-
-function clearWins() {
-  for (var i = 0; i < currentGame.players.length; i++) {
-    currentGame.players[i].resetWins();
-    currentGame.players[i].saveWinsToStorage();
+  } else if (amt === 0) {
+    for (var i = 0; i < currentGame.players.length; i ++) {
+      currentGame.players[i].adjustWins(amt);
+      currentGame.players[i].saveWinsToStorage();
+    }
   }
-  updatePage();
 }
 
-function updatePlayer1Token(e) {
+function updatePlayerToken(e, player) {
   var chosenToken = e.target.value;
-  currentGame.players[0].changeToken(chosenToken);
-  updatePage();
-}
-
-function updatePlayer2Token(e) {
-  var chosenToken = e.target.value;
-  currentGame.players[1].changeToken(chosenToken);
+  if (player === "player1") {
+    currentGame.players[0].changeToken(chosenToken);
+  }
+  else if (player === "player2") {
+    currentGame.players[1].changeToken(chosenToken);
+  }
   updatePage();
 }
