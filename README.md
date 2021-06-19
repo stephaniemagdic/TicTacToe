@@ -1,5 +1,5 @@
 
-# Virtual Tic-Tac-Toe Adventure
+# [Virtual Tic-Tac-Toe Adventure](https://stephaniemagdic.github.io/TicTacToe/)
 
 Virtual Tic-Tac-Toe brings the well-known pen-and-paper game to your device, so you can play tic-tac-toe with friends and family if there is no paper to reach for! 
  * Tokens can be dynamically added to the tic-tac-toe board and checked for a winning array match or a draw. 
