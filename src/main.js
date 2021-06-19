@@ -1,18 +1,17 @@
 //---------------------GLOBAL VARIABLES--------------------------------------//
-//put this in get element by id.
-var leftAsideText = document.querySelector("#player1Wins");
-var rightAsideText = document.querySelector("#player2Wins");
-var leftAsideToken = document.querySelector("#player1Token");
-var rightAsideToken = document.querySelector("#player2Token");
-var trackerDisplay = document.querySelector("#turnTrackerWinnerDisplay");
-var gameBoardSection = document.querySelector("#gameBoardSection");
-var resetWinsButton = document.querySelector("#reset");
-var player1WinSubtractButton = document.querySelector("#subtractWinPlayer1");
-var player2WinSubtractButton = document.querySelector("#subtractWinPlayer2");
-var player1WinAddButton = document.querySelector("#addWinPlayer1");
-var player2WinAddButton = document.querySelector("#addWinPlayer2");
-var leftEmojiSelect = document.querySelector("#selectLeft");
-var rightEmojiSelect = document.querySelector("#selectRight");
+var leftAsideText = document.getElementById("player1Wins");
+var rightAsideText = document.getElementById("player2Wins");
+var leftAsideToken = document.getElementById("player1Token");
+var rightAsideToken = document.getElementById("player2Token");
+var trackerDisplay = document.getElementById("turnTrackerWinnerDisplay");
+var gameBoardSection = document.getElementById("gameBoardSection");
+var resetWinsButton = document.getElementById("reset");
+var player1WinSubtractButton = document.getElementById("subtractWinPlayer1");
+var player2WinSubtractButton = document.getElementById("subtractWinPlayer2");
+var player1WinAddButton = document.getElementById("addWinPlayer1");
+var player2WinAddButton = document.getElementById("addWinPlayer2");
+var leftEmojiSelect = document.getElementById("selectLeft");
+var rightEmojiSelect = document.getElementById("selectRight");
 var currentGame;
 
 //---------------------EVENT LISTENERS---------------------------------------//
@@ -43,13 +42,11 @@ player2WinAddButton.addEventListener("click", function() {
   renderText();
 });
 
-//should I just call my method here rather than create a whole new function?
 resetWinsButton.addEventListener("click", function() {
   updateWins(0, "both");
   renderText();
 });
 
-//updatePlayer1Token(e, player2)
 leftEmojiSelect.addEventListener("change", function(e) {
   updatePlayerToken(e, "player1");
 });
@@ -66,7 +63,6 @@ function createGame() {
   updatePage();
 }
 
-//local storage here versus in game.js
 function getWinsFromStorage(){
   if (localStorage.length) {
     for (var i = 0; i < currentGame.players.length; i++){
@@ -120,7 +116,6 @@ function renderPage() {
   addTokens(token1, token2);
 }
 
-//better name? updateTrackerDisplay()
 function renderText(outcome) {
   var token = currentGame.players[currentGame.currentPlayersTurnIndex].token;
   leftAsideText.innerHTML = `${currentGame.players[0].wins} wins`;
@@ -138,7 +133,6 @@ function renderText(outcome) {
   }
 }
 
-//betterName?
 function updatePage() {
   renderPage();
   renderText();
@@ -149,7 +143,7 @@ function handleTurn(e) {
   currentGame.addPlayerPosition(positionSelected);
   renderPage();
   currentGame.addTurn();
-  var outcome = currentGame.checkOutcome();
+  var outcome = currentGame.checkForWinOrDraw();
   if (outcome === "win") {
     var playerIndex = currentGame.currentPlayersTurnIndex;
     updateWins(1, playerIndex);
@@ -185,8 +179,7 @@ function disableClick() {
 function enableClick() {
   gameBoardSection.style.pointerEvents = "auto";
 }
-//event.target.id = currentMove;
-//call only on reset
+
 function addTokens(player1Token, player2Token) {
   var boardPositions = document.querySelectorAll('td');
   for (var i = 0; i < boardPositions.length; i ++) {
@@ -201,7 +194,7 @@ function addTokens(player1Token, player2Token) {
     }
   }
 }
-//resetWins()
+
 function updateWins(amt, playerIndex) {
   if (amt === -1 || amt === 1) {
   currentGame.players[playerIndex].adjustWins(amt);

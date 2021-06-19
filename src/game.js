@@ -5,7 +5,6 @@ class Game {
     this.totalTurnsTaken = 0;
     this.player1Positions = [];
     this.player2Positions = [];
-    //this.currentMove = "TM"; 
   }
 
   addPlayer(player) {
@@ -56,7 +55,7 @@ class Game {
     return isMatch;
   }
 
-  checkOutcome() {
+  checkForWinOrDraw() {
     var winningBoardSets = {
       win1: ["TL", "TC", "TR"],
       win2: ["ML", "MC", "MR"],
@@ -92,7 +91,6 @@ class Game {
     }
   }
 
-  //pass param... in main or in class?
   toggleTurn() {
     if (this.currentPlayersTurnIndex === 0) {
       this.currentPlayersTurnIndex = 1;
