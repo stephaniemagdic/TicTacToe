@@ -2,6 +2,8 @@
 # [Virtual Tic-Tac-Toe Adventure](https://stephaniemagdic.github.io/TicTacToe/)
 
 [Week 6 Project Spec](https://frontend.turing.edu/projects/module-1/tic-tac-toe-solo.html)
+
+
 Week 5 (Mod1) at Turing School of Software and Design
 
 
