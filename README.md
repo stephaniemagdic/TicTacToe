@@ -1,6 +1,10 @@
 
 # [Virtual Tic-Tac-Toe Adventure](https://stephaniemagdic.github.io/TicTacToe/)
 
+[Week 6 Project Spec](https://frontend.turing.edu/projects/module-1/tic-tac-toe-solo.html)
+Week 5 (Mod1) at Turing School of Software and Design
+
+
 Virtual Tic-Tac-Toe brings the well-known pen-and-paper game to your device, so you can play tic-tac-toe with friends and family if there is no paper to reach for! 
  * Tokens can be dynamically added to the tic-tac-toe board and checked for a winning array match or a draw. 
  * User data is updated on the page when the data model is modifed after a win, a draw, a player takes a turn, or a button is clicked.
